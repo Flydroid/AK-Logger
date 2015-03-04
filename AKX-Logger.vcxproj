@@ -20,12 +20,14 @@
     <ClInclude Include="config.h" />
     <ClInclude Include="sdcard.h" />
     <ClInclude Include="sensor.h" />
+    <ClInclude Include="serial.h" />
     <ClInclude Include="Visual Micro\.AKX-Logger.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="canbus.cpp" />
     <ClCompile Include="sdcard.cpp" />
     <ClCompile Include="sensor.cpp" />
+    <ClCompile Include="serial.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD2EE2B6-2F0C-4829-A99D-87FEED3D21BD}</ProjectGuid>
@@ -61,10 +63,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3;C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\utils;C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\avr;D:\ownCloud\Jonathan Akaflieg\AK_Logger\Software\AKX-Logger;C:\Program Files (x86)\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\teensy\libraries;C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers;D:\Dropbox\Arduino Sketchfolder\libraries;C:\Program Files (x86)\Arduino\hardware\tools\arm-none-eabi\arm-none-eabi\include;C:\Program Files (x86)\Arduino\hardware\tools\arm-none-eabi\arm-none-eabi\include;C:\Program Files (x86)\Arduino\hardware\tools\arm-none-eabi\lib\gcc\arm-none-eabi\4.7.2\include;C:\Program Files (x86)\Arduino\hardware\tools\arm-none-eabi\lib\gcc\arm-none-eabi\4.7.2\include\;%(AdditionalIncludeDirectories); D:\ownCloud\Jonathan Akaflieg\AK_Logger\Software\Teensy Libs</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3;C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\utils;C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\avr;D:\ownCloud\Jonathan Akaflieg\AK_Logger\Software\AKX-Logger;C:\Program Files (x86)\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\teensy\libraries;C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers;D:\Dropbox\Arduino Sketchfolder\libraries;C:\Program Files (x86)\Arduino\hardware\tools\arm-none-eabi\arm-none-eabi\include;C:\Program Files (x86)\Arduino\hardware\tools\arm-none-eabi\arm-none-eabi\include;C:\Program Files (x86)\Arduino\hardware\tools\arm-none-eabi\lib\gcc\arm-none-eabi\4.7.2\include;C:\Program Files (x86)\Arduino\hardware\tools\arm-none-eabi\lib\gcc\arm-none-eabi\4.7.2\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>D:\ownCloud\Jonathan Akaflieg\AK_Logger\Software\AKX-Logger\Visual Micro\.AKX-Logger.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
-      <PreprocessorDefinitions>ARDUINO=106;ARDUINO_MAIN;__AVR__;__avr__;__cplusplus;GCC_VERSION=40702;ARDUINO_ARCH_AVR;ARDUINO_AVR_TEENSY31;__MK20DX256__;TEENSYDUINO=120;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_VMDEBUG=1;ARDUINO=106;ARDUINO_MAIN;__AVR__;__avr__;__cplusplus;GCC_VERSION=40702;ARDUINO_ARCH_AVR;ARDUINO_AVR_TEENSY31;__MK20DX256__;TEENSYDUINO=120;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

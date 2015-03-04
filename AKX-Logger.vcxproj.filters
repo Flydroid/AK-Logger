@@ -33,6 +33,9 @@
     <ClInclude Include="sdcard.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="serial.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sensor.cpp">
@@ -42,6 +45,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="sdcard.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="serial.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
