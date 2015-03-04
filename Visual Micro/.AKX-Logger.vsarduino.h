@@ -10,6 +10,7 @@
 
 #ifndef _VSARDUINO_H_
 #define _VSARDUINO_H_
+#define _VMDEBUG 1
 #define ARDUINO 106
 #define ARDUINO_MAIN
 #define __AVR__
@@ -98,4 +99,6 @@ extern char *strupr(char *);
 #include <sdcard.h>
 #include <sensor.cpp>
 #include <sensor.h>
+#include <serial.cpp>
+#include <serial.h>
 #endif

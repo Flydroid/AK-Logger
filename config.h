@@ -1,37 +1,44 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+/*
+Konfigurationsdatei:
+Hier wird festlegt als was das Modul geflasht wird.
+Master, Messmodul oder Telemetriemodul
+
+Die Funktionien der einzelen Module sind hier definiert.
+
+*/
+
 /* Module */
 #define MESSMODUL
+
+//#define TELEMETRY
+//#define MASTER
+
+
+
 #ifdef MESSMODUL
-#define HCLA 
+#define HCLA 5
+int channels[] = {0,1,2,3};	//Bsp für ein normal bestücktes Messmodul, mit 4 HCLA
 
 #endif
 
-#define MASTER
+
 #ifdef MASTER
 
 
 #endif
 
-#define TELEMETRY
+
 #ifdef TELEMETRY
 
 #endif
 
 
-//Multiplexer Controllpins
 
 
-#ifdef HCLA
 
-#define PRESSURE_SENSOR_ADRESS 0x78
-#define s0	5
-#define s1	6
-#define s2	7
-#define s3	8
-
-#endif
 
 
 
