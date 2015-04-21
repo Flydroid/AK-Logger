@@ -37,7 +37,8 @@ public:
 	sensor();
 	~sensor();
 
-	uint16_t sensor::readHCLA(int channel);
+	uint16_t readHCLA(int channel);
+	float calc_airspeed();
 
 	
 	

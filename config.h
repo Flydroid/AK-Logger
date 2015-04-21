@@ -1,5 +1,6 @@
 #ifndef CONFIG_H
 #define CONFIG_H
+#include "string.h"
 
 /*
 Konfigurationsdatei:
@@ -11,10 +12,11 @@ Die Funktionien der einzelen Module sind hier definiert.
 */
 
 /* Module */
-#define MESSMODUL
+//#define MESSMODU
+
 
 //#define TELEMETRY
-//#define MASTER
+#define MASTER
 
 
 
@@ -26,6 +28,12 @@ int channels[] = {0,1,2,3};	//Bsp für ein normal bestücktes Messmodul, mit 4 HCL
 
 
 #ifdef MASTER
+
+#define MAVLINK
+
+#define CH_AIRSPEED  0
+#define CH_ATTACK	 1
+#define CH_SLIP	     1
 
 
 #endif
