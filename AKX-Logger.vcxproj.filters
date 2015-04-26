@@ -13,9 +13,39 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="_core">
+      <UniqueIdentifier>{994bae53-b612-40b7-b527-ca17a0d3512d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_core\avr">
+      <UniqueIdentifier>{81cc38a9-21ef-4d30-b72c-02a937c71088}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_core\util">
+      <UniqueIdentifier>{b532216b-4a63-445f-91fe-625b186d4700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_libraries">
+      <UniqueIdentifier>{5e80552c-ce37-4ef9-a534-19fb0e2ff9b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_libraries\FlexCAN">
+      <UniqueIdentifier>{3d2f923f-53fa-44bd-a995-9fbde7447e64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_libraries\i2c_t3">
+      <UniqueIdentifier>{497fc34b-68d1-42c6-8ae7-153e14c6d7c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_libraries\mavlink">
+      <UniqueIdentifier>{7abf06ad-a9df-4f15-b856-1933b0e43e90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_libraries\SdFat">
+      <UniqueIdentifier>{b1e805ee-566e-43d8-8057-754be8f428aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_libraries\SdFat\utility">
+      <UniqueIdentifier>{af40110f-7599-44b3-9dd6-66dfc1ebd575}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="AKX-Logger.ino" />
+    <None Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\memcpy-armv7m.S">
+      <Filter>_core</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Visual Micro\.AKX-Logger.vsarduino.h">
@@ -36,6 +66,657 @@
     <ClInclude Include="serial.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\Arduino.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\arm_common_tables.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\arm_math.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\AudioStream.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\avr_emulation.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\avr_functions.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\binary.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\Client.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\core_cm4.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\core_cm4_simd.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\core_cmInstr.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\core_id.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\core_pins.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\DMAChannel.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\elapsedMillis.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\HardwareSerial.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\IntervalTimer.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\IPAddress.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\keylayouts.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\kinetis.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\math_helper.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\mk20dx128.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\new.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\pins_arduino.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\Print.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\Printable.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\Server.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\ser_print.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\SPIFIFO.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\Stream.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\Udp.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_desc.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_dev.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_flightsim.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_joystick.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_keyboard.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_mem.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_midi.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_mouse.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_names.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_rawhid.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_seremu.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_serial.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_undef.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\WCharacter.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\WConstants.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\wiring.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\wiring_private.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\WProgram.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\WString.h">
+      <Filter>_core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\avr\eeprom.h">
+      <Filter>_core\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\avr\interrupt.h">
+      <Filter>_core\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\avr\io.h">
+      <Filter>_core\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\avr\pgmspace.h">
+      <Filter>_core\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\avr\power.h">
+      <Filter>_core\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\avr\sleep.h">
+      <Filter>_core\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\avr\wdt.h">
+      <Filter>_core\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\util\atomic.h">
+      <Filter>_core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\util\crc16.h">
+      <Filter>_core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\util\delay.h">
+      <Filter>_core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\util\parity.h">
+      <Filter>_core\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\FlexCAN\FlexCAN.h">
+      <Filter>_libraries\FlexCAN</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\FlexCAN\kinetis_flexcan.h">
+      <Filter>_libraries\FlexCAN</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\i2c_t3\i2c_t3.h">
+      <Filter>_libraries\i2c_t3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\checksum.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\common.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_conversions.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_helpers.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_actuator_control_target.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_attitude.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_attitude_quaternion.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_attitude_quaternion_cov.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_attitude_target.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_att_pos_mocap.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_auth_key.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_autopilot_version.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_battery_status.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_camera_trigger.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_change_operator_control.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_change_operator_control_ack.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_command_ack.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_command_int.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_command_long.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_data_stream.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_data_transmission_handshake.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_debug.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_debug_vect.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_distance_sensor.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_encapsulated_data.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_file_transfer_protocol.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_global_position_int.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_global_position_int_cov.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_global_vision_position_estimate.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_gps2_raw.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_gps2_rtk.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_gps_global_origin.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_gps_inject_data.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_gps_raw_int.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_gps_rtk.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_gps_status.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_heartbeat.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_highres_imu.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_hil_controls.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_hil_gps.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_hil_optical_flow.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_hil_rc_inputs_raw.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_hil_sensor.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_hil_state.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_hil_state_quaternion.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_local_position_ned.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_local_position_ned_cov.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_local_position_ned_system_global_offset.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_log_data.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_log_entry.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_log_erase.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_log_request_data.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_log_request_end.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_log_request_list.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_manual_control.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_manual_setpoint.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_memory_vect.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_mission_ack.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_mission_clear_all.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_mission_count.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_mission_current.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_mission_item.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_mission_item_int.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_mission_item_reached.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_mission_request.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_mission_request_list.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_mission_request_partial_list.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_mission_set_current.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_mission_write_partial_list.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_named_value_float.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_named_value_int.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_nav_controller_output.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_optical_flow.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_optical_flow_rad.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_param_map_rc.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_param_request_list.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_param_request_read.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_param_set.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_param_value.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_ping.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_position_target_global_int.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_position_target_local_ned.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_power_status.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_radio_status.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_raw_imu.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_raw_pressure.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_rc_channels.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_rc_channels_override.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_rc_channels_raw.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_rc_channels_scaled.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_request_data_stream.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_safety_allowed_area.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_safety_set_allowed_area.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_scaled_imu.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_scaled_imu2.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_scaled_imu3.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_scaled_pressure.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_scaled_pressure2.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_serial_control.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_servo_output_raw.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_set_actuator_control_target.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_set_attitude_target.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_set_gps_global_origin.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_set_mode.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_set_position_target_global_int.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_set_position_target_local_ned.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_sim_state.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_statustext.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_system_time.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_sys_status.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_terrain_check.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_terrain_data.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_terrain_report.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_terrain_request.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_timesync.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_v2_extension.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_vfr_hud.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_vicon_position_estimate.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_vision_position_estimate.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_msg_vision_speed_estimate.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\mavlink_types.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\protocol.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\testsuite.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\mavlink\version.h">
+      <Filter>_libraries\mavlink</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\MinimumSerial.h">
+      <Filter>_libraries\SdFat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\SdFat.h">
+      <Filter>_libraries\SdFat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\SdFatConfig.h">
+      <Filter>_libraries\SdFat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\SdFatmainpage.h">
+      <Filter>_libraries\SdFat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\SdFatUtil.h">
+      <Filter>_libraries\SdFat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\SdInfo.h">
+      <Filter>_libraries\SdFat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\SdSpi.h">
+      <Filter>_libraries\SdFat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\SdSpiCard.h">
+      <Filter>_libraries\SdFat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\SdVolume.h">
+      <Filter>_libraries\SdFat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\ArduinoFiles.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\ArduinoStream.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\bufstream.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\DigitalPin.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\FatApiConstants.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\FatFile.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\FatFileSystem.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\FatLib.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\FatLibConfig.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\FatStructs.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\FatVolume.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\FmtNumber.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\fstream.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\ios.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\iostream.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\istream.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\ostream.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\SoftSPI.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libraries\SdFat\utility\StdioStream.h">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sensor.cpp">
@@ -49,6 +730,183 @@
     </ClCompile>
     <ClCompile Include="serial.cpp">
       <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\analog.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\AudioStream.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\avr_emulation.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\DMAChannel.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\eeprom.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\HardwareSerial1.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\HardwareSerial2.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\HardwareSerial3.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\IntervalTimer.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\IPAddress.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\keylayouts.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\main.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\math_helper.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\mk20dx128.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\new.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\nonstd.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\pins_teensy.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\Print.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\serial1.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\serial2.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\serial3.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\ser_print.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\Stream.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\Tone.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\touch.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_desc.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_dev.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_flightsim.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_inst.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_joystick.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_keyboard.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_mem.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_midi.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_mouse.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_rawhid.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_seremu.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\usb_serial.c">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\WMath.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\WString.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Program Files (x86)\Arduino\hardware\teensy\cores\teensy3\yield.cpp">
+      <Filter>_core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\FlexCAN\FlexCAN.cpp">
+      <Filter>_libraries\FlexCAN</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\i2c_t3\i2c_t3.cpp">
+      <Filter>_libraries\i2c_t3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\SdFat\MinimumSerial.cpp">
+      <Filter>_libraries\SdFat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\SdFat\SdFatBase.cpp">
+      <Filter>_libraries\SdFat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\SdFat\SdFatUtil.cpp">
+      <Filter>_libraries\SdFat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\SdFat\SdSpiCard.cpp">
+      <Filter>_libraries\SdFat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\SdFat\SdSpiSAM3X.cpp">
+      <Filter>_libraries\SdFat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\SdFat\SdSpiSTM32F1.cpp">
+      <Filter>_libraries\SdFat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\SdFat\SdSpiTeensy3.cpp">
+      <Filter>_libraries\SdFat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\SdFat\utility\FatFile.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\SdFat\utility\FatFileLFN.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\SdFat\utility\FatFilePrint.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\SdFat\utility\FatFileSFN.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\SdFat\utility\FatVolume.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\SdFat\utility\FmtNumber.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\SdFat\utility\fstream.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\SdFat\utility\istream.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\SdFat\utility\ostream.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\SdFat\utility\StdioStream.cpp">
+      <Filter>_libraries\SdFat\utility</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

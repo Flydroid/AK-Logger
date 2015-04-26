@@ -24,7 +24,8 @@ sensor::~sensor()
 
 
 uint16_t sensor::readHCLA(int channel){
-	SelectChannel(channel);
+	sensor::SelectChannel(channel);
+	
 	uint8_t msb, lsb;
 	uint16_t rawPressure;
 	Wire.requestFrom(PRESSURE_SENSOR_ADRESS, 2, I2C_STOP);
@@ -40,7 +41,7 @@ uint16_t sensor::readHCLA(int channel){
 
 
 //channel select für 8 Kanäle
-void SelectChannel(int channel){
+void sensor::SelectChannel(int channel){
 	int controlPin[] = { s0, s1, s2};
 
 	int muxChannel[8][3] = {
@@ -63,6 +64,8 @@ void SelectChannel(int channel){
 
  float sensor::calc_airspeed(){
 	uint16_t temp = readHCLA(CH_AIRSPEED);
-	float airspeed = temp*x; // Airspeed calculation	
+	float airspeed;
+	//temp*x; // Airspeed calculation	
+	 
 	return airspeed;
 }
