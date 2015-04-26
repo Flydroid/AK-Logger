@@ -7,8 +7,8 @@ Interialmeasurementunit MPU9150
 Statischer Drucksensor
 */
 
-#include "i2c_t3\i2c_t3.h"
 #include "config.h"
+#include "i2c_t3/i2c_t3.h"
 
 /* Senoren:*/
 #ifdef HCLA
@@ -37,9 +37,10 @@ public:
 	sensor();
 	~sensor();
 
-	uint16_t sensor::readHCLA(int channel);
+	uint16_t readHCLA(int channel);
+	float calc_airspeed();
 
-	
+	int sensors[2] = { SENSOR1, SENSOR0 };
 	
 
 private:

@@ -1,6 +1,6 @@
 #include "sensor.h"
 
-
+#define PRESSURE_SENSOR_ADRESS	0x7
 
 sensor::sensor(){
 #ifdef HCLA
@@ -28,11 +28,14 @@ uint16_t sensor::readHCLA(int channel){
 	uint8_t msb, lsb;
 	uint16_t rawPressure;
 	Wire.requestFrom(PRESSURE_SENSOR_ADRESS, 2, I2C_STOP);
-	while (Wire.available()){
-		 msb = Wire.read();
-		 lsb = Wire.read();
+	msb = Wire.readByte();
+	lsb = Wire.readByte();
+	if (Wire.getError() == 0){
+		return rawPressure = (int)(msb << 8) | lsb;
 	}
-	return rawPressure = (int)(msb << 8) | lsb;
+	else{
+	//Error Funktion
+	}
 }
 
 
@@ -55,4 +58,11 @@ void SelectChannel(int channel){
 	for (int i = 0; i < 3; i++){
 		digitalWrite(controlPin[i], muxChannel[channel][i]);
 	}
+}
+
+
+ float sensor::calc_airspeed(){
+	uint16_t temp = readHCLA(CH_AIRSPEED);
+	float airspeed = temp*x; // Airspeed calculation	
+	return airspeed;
 }
