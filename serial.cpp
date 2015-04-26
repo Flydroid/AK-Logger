@@ -1,5 +1,7 @@
 #include "serial.h"
 
+sensor HCLA;
+
 
 
 serial::serial()
@@ -9,6 +11,8 @@ serial::serial()
 	int autopilot_type = MAV_AUTOPILOT_GENERIC;
 	mavlink_message_t msg;
 	uint8_t buf[MAVLINK_MAX_PACKET_LEN];
+	Serial1.begin(9600);
+
 #endif
 #ifdef GPS
 #endif
@@ -29,10 +33,13 @@ void serial::heartbeat(){
 	Serial1.write(buf, len);
 }
 
-void serial::air_speed(float airspeed){
-	float airspeed = calc_airspeed();
+void serial::air_speed(){
+	float airspeed = HCLA.calc_airspeed();
 	mavlink_msg_airspeed_pack(100, 200, &msg, airspeed);
 	uint16_t len = mavlink_msg_to_send_buffer(buf, &msg);
-	Serial1.write(buf, len);
+	if (Serial1.write(buf, len) != len){
+		// Fehlerroutine
+	}
+	
 }
 			  

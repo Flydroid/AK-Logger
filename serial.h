@@ -6,7 +6,7 @@ sowie die Implemntierug der Weitergabe von Fehlermeldungen
 */
 
 #include "config.h"
-#include "mavlink\mavlink.h"
+#include "mavlink/minimal/minimal.h"
 #include "sensor.h"
 class serial
 {
@@ -15,7 +15,7 @@ public:
 	serial();
 	~serial();
 	void heartbeat();
-	void serial::air_speed(float airspeed);
+	void air_speed();
 
 private:
 	int system_type;

@@ -1,6 +1,6 @@
 #include "sensor.h"
 
-
+#define PRESSURE_SENSOR_ADRESS	0x7
 
 sensor::sensor(){
 #ifdef HCLA
@@ -23,7 +23,7 @@ sensor::~sensor()
 
 
 
-uint16_t readHCLA(int channel){
+uint16_t sensor::readHCLA(int channel){
 	SelectChannel(channel);
 	uint8_t msb, lsb;
 	uint16_t rawPressure;
@@ -61,7 +61,7 @@ void SelectChannel(int channel){
 }
 
 
- float calc_airspeed(){
+ float sensor::calc_airspeed(){
 	uint16_t temp = readHCLA(CH_AIRSPEED);
 	float airspeed = temp*x; // Airspeed calculation	
 	return airspeed;

@@ -2,7 +2,7 @@
 
 //Klasse für das Loggen der Daten auf die SD-Karte
 
-#include "SdFat\SdFat.h"
+#include "sdFat/SdFat.h"
 
 class sdcard
 {
