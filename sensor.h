@@ -42,6 +42,7 @@ public:
 
 	int sensors[2] = { SENSOR1, SENSOR0 };
 	
+	void SelectChannel(int channel);
 
 private:
 	int _channels[];

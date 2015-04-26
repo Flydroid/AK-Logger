@@ -1,6 +1,8 @@
 
 
 
+#include "mavlink\mavlink.h"
+#include "SdFat\SdFat.h"
 #include "config.h"
 
 #ifdef MAVLINK

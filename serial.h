@@ -6,8 +6,10 @@ sowie die Implemntierug der Weitergabe von Fehlermeldungen
 */
 
 #include "config.h"
-#include "mavlink/minimal/minimal.h"
-#include "sensor.h"
+#include "sensor.h"	   
+#include "mavlink/mavlink.h"
+
+
 class serial
 {
 public:
