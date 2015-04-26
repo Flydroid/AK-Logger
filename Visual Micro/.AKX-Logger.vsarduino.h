@@ -10,17 +10,22 @@
 
 #ifndef _VSARDUINO_H_
 #define _VSARDUINO_H_
+#define __ARM_MK20dx256__
+#define __ARM_MK20DX256__
 #define _VMDEBUG 1
 #define ARDUINO 106
 #define ARDUINO_MAIN
 #define __AVR__
 #define __avr__
+#define F_CPU 96000000
+#define USB_SERIAL_HID
+#define LAYOUT_US_ENGLISH
 #define __cplusplus
-#define GCC_VERSION 40702
+#define GCC_VERSION 40804
 #define ARDUINO_ARCH_AVR
 #define ARDUINO_AVR_TEENSY31
 #define __MK20DX256__
-#define TEENSYDUINO 120
+#define TEENSYDUINO 122
 #define __extension__
 #define  __attribute__(x)
 typedef void *__builtin_va_list;
