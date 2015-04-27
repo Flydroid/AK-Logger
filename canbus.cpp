@@ -1,5 +1,5 @@
 #include "canbus.h"
-FlexCAN can;
+
 
 
 
@@ -7,7 +7,7 @@ canbus::canbus(){
 	
 	can.begin();
 #ifdef MASTER
-	broadcast.id = 0x1;
+	broadcast.id = 0x0;
 	broadcast.len = 0x1;
 	broadcast.buf[0]=0x00
 #endif

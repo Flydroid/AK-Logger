@@ -10,11 +10,10 @@ Statischer Drucksensor
 #include "config.h"
 #include "i2c_t3/i2c_t3.h"
 
+
 /* Senoren:*/
 #ifdef HCLA
 #define PRESSURE_SENSOR_ADRESS 0x78
-
-
 //Multiplexer Kontrollpins, für Messmodul angepasst
 #define s0	10
 #define s1	11
@@ -40,12 +39,22 @@ public:
 	uint16_t readHCLA(int channel);
 	float calc_airspeed();
 
-	int sensors[2] = { SENSOR1, SENSOR0 };
+	
+
+	int* channels; 
+	void setCh(int chnum, int ch_stat);
+
+
+	
+
 	
 	void SelectChannel(int channel);
 
 private:
-	int _channels[];
+
+	int _ch_num = 0;
+
+
 	
 	
 

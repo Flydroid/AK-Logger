@@ -2,9 +2,41 @@
 
 #define PRESSURE_SENSOR_ADRESS	0x7
 
+
+int ch_stat=0;
+
+
 sensor::sensor(){
 #ifdef HCLA
 Wire.begin(I2C_MASTER, 0x00, I2C_PINS_18_19, I2C_PULLUP_EXT, I2C_RATE_400);
+
+#ifdef SENSOR0
+setCh(SENSOR0, ch_stat);
+#endif 
+#ifdef SENSOR1
+setCh(SENSOR1, ch_stat);
+#endif  
+#ifdef SENSOR2
+setCh(SENSOR2, ch_stat);
+#endif // SENSOR2
+
+#ifdef SENSOR3
+setCh(SENSOR3, ch_stat);
+#endif 
+#ifdef SENSOR4
+setCh(SENSOR4, ch_stat);
+#endif 
+#ifdef SENSOR5
+setCh(SENSOR5, ch_stat);
+#endif
+#ifdef SENSOR6
+setCh(SENSOR6, ch_stat);
+#endif
+#ifdef SENSOR7
+setCh(SENSOR7, ch_stat);
+#endif
+
+
 
 
 
@@ -42,6 +74,7 @@ uint16_t sensor::readHCLA(int channel){
 
 //channel select für 8 Kanäle
 void sensor::SelectChannel(int channel){
+
 	int controlPin[] = { s0, s1, s2};
 
 	int muxChannel[8][3] = {
@@ -69,3 +102,11 @@ void sensor::SelectChannel(int channel){
 	 
 	return airspeed;
 }
+
+  
+ void sensor::setCh(int chnum,int ch_stat){
+	 
+	channels  = new int;
+	channels[ch_stat] = chnum;
+	ch_stat++;
+ }
