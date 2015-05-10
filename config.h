@@ -1,6 +1,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#include "WString.h"
+
 
 /*
 Konfigurationsdatei:
@@ -22,7 +24,24 @@ Die Funktionien der einzelen Module sind hier definiert.
 
 #ifdef MESSMODUL
 #define HCLA 
-#define MESSMODUL_ID 1
+
+/* Define identifying  CAN addresses for
+the measurement modules
+0x00 is reserved ID for the master module
+The MESSMODUL_ID is counted from 0x01 to 0x10
+The extended ID is for Modules which need more
+than one massage for sending its data  */
+#define MESSMODUL_ID 0x01
+#define MESSMODUL_ID_EXT 0x11
+
+//name of the module, max 8 characters long
+String MOD_NAME = "winglet";
+
+
+
+
+
+
 
 #endif
 
@@ -31,11 +50,12 @@ Die Funktionien der einzelen Module sind hier definiert.
 #define HCLA
 #define MAVLINK
 #define CANBUS
-#define MASTER_ID 0
+#define MASTER_ID 0x99
 
-#define CH_AIRSPEED  0
-#define CH_ATTACK	 1
-#define CH_SLIP	     2
+#define CH_AIRSPEED  0x00
+#define CH_ATTACK	 0x01
+#define CH_SLIP	     0x02
+
 
 
 #endif

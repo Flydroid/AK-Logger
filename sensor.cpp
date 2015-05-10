@@ -2,7 +2,7 @@
 
 #define PRESSURE_SENSOR_ADRESS	0x7
 
-
+//counting var for generating the channel array
 int ch_stat=0;
 
 
@@ -103,7 +103,8 @@ void sensor::SelectChannel(int channel){
 	return airspeed;
 }
 
-  
+
+ //generates an array which contains the sensor channel numbers
  void sensor::setCh(int chnum,int ch_stat){
 	 
 	channels  = new int;
