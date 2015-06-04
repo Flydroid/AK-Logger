@@ -17,9 +17,6 @@ canbus::canbus(){
 }
 
 
-canbus::~canbus()
-{
-}
 
 
 

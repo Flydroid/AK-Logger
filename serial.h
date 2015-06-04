@@ -1,4 +1,7 @@
-#pragma once
+#ifndef SERIAL_H
+#define SERIAL_H
+
+
 
 /*
 Klasse für die Serialkommunikation mit PC, Funkmodul und Telemetrie
@@ -15,7 +18,7 @@ class serial
 public:
 
 	serial();
-	~serial();
+	
 	void heartbeat();
 	void air_speed();
 
@@ -26,5 +29,7 @@ private:
 	uint8_t buf[MAVLINK_MAX_PACKET_LEN];
 
 
+
 };
 
+#endif // !SERIAL_H

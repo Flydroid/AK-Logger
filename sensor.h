@@ -1,4 +1,8 @@
-#pragma once
+#ifndef SENSOR_H
+#define SENSOR_H
+
+
+
 
 /*
 Klasse für das Auslesen der Sensoren
@@ -34,17 +38,18 @@ class sensor
 {
 public:
 	sensor();
-	~sensor();
+	
 
 	uint16_t readHCLA(int channel);
 	float calc_airspeed();
 	int* channels; 
-	void setCh(int chnum, int ch_stat);
+	void setCh(int chnum);
 	void SelectChannel(int channel);
 
 private:
 
 	int _ch_num = 0;
+	int ch_stat = 0;
 
 
 	
@@ -52,3 +57,4 @@ private:
 
 };
 
+#endif // !SENSOR_H

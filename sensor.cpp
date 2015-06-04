@@ -1,6 +1,6 @@
 #include "sensor.h"
 
-#define PRESSURE_SENSOR_ADRESS	0x7
+
 
 //counting var for generating the channel array
 int ch_stat=0;
@@ -11,29 +11,29 @@ sensor::sensor(){
 Wire.begin(I2C_MASTER, 0x00, I2C_PINS_18_19, I2C_PULLUP_EXT, I2C_RATE_400);
 
 #ifdef SENSOR0
-setCh(SENSOR0, ch_stat);
+sensor::setCh(SENSOR0);
 #endif 
 #ifdef SENSOR1
-setCh(SENSOR1, ch_stat);
+sensor::setCh(SENSOR1);
 #endif  
 #ifdef SENSOR2
-setCh(SENSOR2, ch_stat);
+sensor::setCh(SENSOR2);
 #endif // SENSOR2
 
 #ifdef SENSOR3
-setCh(SENSOR3, ch_stat);
+sensor::setCh(SENSOR3);
 #endif 
 #ifdef SENSOR4
-setCh(SENSOR4, ch_stat);
+sensor::setCh(SENSOR4);
 #endif 
 #ifdef SENSOR5
-setCh(SENSOR5, ch_stat);
+sensor::setCh(SENSOR5);
 #endif
 #ifdef SENSOR6
-setCh(SENSOR6, ch_stat);
+sensor::setCh(SENSOR6);
 #endif
 #ifdef SENSOR7
-setCh(SENSOR7, ch_stat);
+sensor::setCh(SENSOR7);
 #endif
 
 
@@ -47,12 +47,6 @@ setCh(SENSOR7, ch_stat);
 #endif
 
 }
-
-//Destructor
-sensor::~sensor()
-{
-}
-
 
 
 uint16_t sensor::readHCLA(int channel){
@@ -94,20 +88,18 @@ void sensor::SelectChannel(int channel){
 	}
 }
 
-
- float sensor::calc_airspeed(){
+/*
+float sensor::calc_airspeed(){
 	uint16_t temp = readHCLA(CH_AIRSPEED);
 	float airspeed;
 	//temp*x; // Airspeed calculation	
 	 
 	return airspeed;
 }
-
-
+*/
  //generates an array which contains the sensor channel numbers
- void sensor::setCh(int chnum,int ch_stat){
-	 
+ void sensor::setCh(int chnum){ 
 	channels  = new int;
 	channels[ch_stat] = chnum;
 	ch_stat++;
- }
+ }					

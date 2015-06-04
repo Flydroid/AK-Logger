@@ -34,8 +34,9 @@ than one massage for sending its data  */
 #define MESSMODUL_ID 0x01
 #define MESSMODUL_ID_EXT 0x11
 
+
 //name of the module, max 8 characters long
-String MOD_NAME = "winglet";
+#define MOD_NAME "winglet"
 
 
 
@@ -49,12 +50,24 @@ String MOD_NAME = "winglet";
 #ifdef MASTER
 #define HCLA
 #define MAVLINK
+#define SD_LOG
 #define CANBUS
 #define MASTER_ID 0x99
+//#define GPS
+#ifdef GPS
+#define SERIAL_GPS Serial2
+#endif
+
 
 #define CH_AIRSPEED  0x00
 #define CH_ATTACK	 0x01
 #define CH_SLIP	     0x02
+
+
+
+//SD-Card Definitions:
+#define SS_PIN 14
+#define BASE_FILENAME "Logger.dat"
 
 
 

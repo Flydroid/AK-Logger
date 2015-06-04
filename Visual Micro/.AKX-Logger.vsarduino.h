@@ -10,80 +10,67 @@
 
 #ifndef _VSARDUINO_H_
 #define _VSARDUINO_H_
-#define __ARM_MK20dx256__
-#define __ARM_MK20DX256__
-#define _VMDEBUG 1
-#define ARDUINO 106
-#define ARDUINO_MAIN
-#define __AVR__
-#define __avr__
+#define __MK20DX256__
+#define TEENSYDUINO 123
+#define ARDUINO 164
 #define F_CPU 96000000
-#define USB_SERIAL_HID
+#define ARDUINO_ARCH_AVR
+#define USB_SERIAL
 #define LAYOUT_US_ENGLISH
 #define __cplusplus
-#define GCC_VERSION 40804
-#define ARDUINO_ARCH_AVR
-#define ARDUINO_AVR_TEENSY31
-#define __MK20DX256__
-#define TEENSYDUINO 122
-#define __extension__
-#define  __attribute__(x)
-typedef void *__builtin_va_list;
-
-#define __extension__
-#define __ATTR_PURE__
-#define __ATTR_CONST__
 #define __inline__
-#define __asm__ 
+#define __asm__(x)
+#define __extension__
+//#define __ATTR_PURE__
+//#define __ATTR_CONST__
+#define __inline__
+//#define __asm__ 
 #define __volatile__
-
+#define GCC_VERSION 40801
+#define volatile(va_arg) 
+#define _CONST
+typedef void *__builtin_va_list;
+#define __builtin_va_start
+#define __builtin_va_end
+//#define __DOXYGEN__
+#define __attribute__(x)
+#define NOINLINE __attribute__((noinline))
+#define prog_void
+#define PGM_VOID_P int
+#ifndef __builtin_constant_p
+#define __builtin_constant_p __attribute__((__const__))
+#endif
+#ifndef __builtin_strlen
+#define __builtin_strlen  __attribute__((__const__))
+#endif
 #define NEW_H
-//#undef F
-//extern char F(const char*);
+/*
+#ifndef __ATTR_CONST__
+#define __ATTR_CONST__ __attribute__((__const__))
+#endif
+
+#ifndef __ATTR_MALLOC__
+#define __ATTR_MALLOC__ __attribute__((__malloc__))
+#endif
+
+#ifndef __ATTR_NORETURN__
+#define __ATTR_NORETURN__ __attribute__((__noreturn__))
+#endif
+
+#ifndef __ATTR_PURE__
+#define __ATTR_PURE__ __attribute__((__pure__))
+#endif            
+*/
+typedef unsigned char byte;
+extern "C" void __cxa_pure_virtual() {;}
 
 
-extern int ffs (int __val) __ATTR_CONST__;
-extern int ffsl (long __val) __ATTR_CONST__;
-extern int ffsll (long long __val) __ATTR_CONST__;
-extern void *memccpy(void *, const void *, int, size_t);
-extern void *memchr(const void *, int, size_t) __ATTR_PURE__;
-extern int memcmp(const void *, const void *, size_t) __ATTR_PURE__;
-extern void *memcpy(void *, const void *, size_t);
-extern void *memmem(const void *, size_t, const void *, size_t) __ATTR_PURE__;
-extern void *memmove(void *, const void *, size_t);
-extern void *memrchr(const void *, int, size_t) __ATTR_PURE__;
-extern void *memset(void *, int, size_t);
-extern char *strcat(char *, const char *);
-extern char *strchr(const char *, int) __ATTR_PURE__;
-extern char *strchrnul(const char *, int) __ATTR_PURE__;
-extern int strcmp(const char *, const char *) __ATTR_PURE__;
-extern char *strcpy(char *, const char *);
-extern int strcasecmp(const char *, const char *) __ATTR_PURE__;
-extern char *strcasestr(const char *, const char *) __ATTR_PURE__;
-extern size_t strcspn(const char *__s, const char *__reject) __ATTR_PURE__;
-extern char *strdup(const char *s1);
-extern size_t strlcat(char *, const char *, size_t);
-extern size_t strlcpy(char *, const char *, size_t);
-extern size_t strlen(const char *) __ATTR_PURE__;
-extern char *strlwr(char *);
-extern char *strncat(char *, const char *, size_t);
-extern int strncmp(const char *, const char *, size_t) __ATTR_PURE__;
-extern char *strncpy(char *, const char *, size_t);
-extern int strncasecmp(const char *, const char *, size_t) __ATTR_PURE__;
-extern size_t strnlen(const char *, size_t) __ATTR_PURE__;
-extern char *strpbrk(const char *__s, const char *__accept) __ATTR_PURE__;
-extern char *strrchr(const char *, int) __ATTR_PURE__;
-extern char *strrev(char *);
-extern char *strsep(char **, const char *);
-extern size_t strspn(const char *__s, const char *__accept) __ATTR_PURE__;
-extern char *strstr(const char *, const char *) __ATTR_PURE__;
-extern char *strtok(char *, const char *);
-extern char *strtok_r(char *, const char *, char **);
-extern char *strupr(char *);
 
 #include <arduino.h>
 #undef F
 #define F(string_literal) ((const PROGMEM char *)(string_literal))
+#undef PSTR
+#define PSTR(string_literal) ((const PROGMEM char *)(string_literal))
 #undef cli
 #define cli()
 #define pgm_read_byte(address_short)
@@ -96,12 +83,10 @@ extern char *strupr(char *);
 #define portOutputRegister(P)
 #define portInputRegister(P)
 #define portModeRegister(P)
-#include <AKX-Logger.ino>
+#include <AKXLogger.ino>
 #include <canbus.cpp>
 #include <canbus.h>
 #include <config.h>
-#include <sdcard.cpp>
-#include <sdcard.h>
 #include <sensor.cpp>
 #include <sensor.h>
 #include <serial.cpp>

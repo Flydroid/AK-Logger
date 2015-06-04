@@ -1,3 +1,8 @@
+#ifndef CANBUS_H
+#define CANBUS_H
+
+
+
 #include "FlexCAN/FlexCAN.h"
 
 
@@ -13,7 +18,7 @@ class canbus
 public:
 
 	canbus();
-	~canbus();
+	
 	void write(CAN_message_t msg);
 	int read(CAN_message_t msg);
 	FlexCAN can;
@@ -27,3 +32,4 @@ public:
 
 };
 
+#endif // !CANBUS_H
