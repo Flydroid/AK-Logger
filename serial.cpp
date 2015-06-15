@@ -3,9 +3,6 @@
 
 sensor _HCLA;
 
-
-
-
 serial::serial(){
 #ifdef MAVLINK
 	system_type = MAV_FIXED_WING;
@@ -17,12 +14,7 @@ serial::serial(){
 #endif
 #ifdef ACT_TELEMETRY
 #endif
-	
 }
-
-
-
-
 
 #ifdef MAVLINK
 void serial::heartbeat(){
@@ -31,17 +23,14 @@ void serial::heartbeat(){
 	Serial1.write(buf, len);
 }
 
-
 /*
 void serial::air_speed(){
-	float airspeed = _HCLA.calc_airspeed();
-	mavlink_msg_airspeed_pack(100, 200, &msg, airspeed);
-	uint16_t len = mavlink_msg_to_send_buffer(buf, &msg);
-	if (Serial1.write(buf, len) != len){
-		// Fehlerroutine
-	}
-	
+float airspeed = _HCLA.calc_airspeed();
+mavlink_msg_airspeed_pack(100, 200, &msg, airspeed);
+uint16_t len = mavlink_msg_to_send_buffer(buf, &msg);
+if (Serial1.write(buf, len) != len){
+// Fehlerroutine
+}
 }
 */
 #endif
-	

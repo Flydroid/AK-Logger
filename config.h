@@ -3,7 +3,6 @@
 
 #include "WString.h"
 
-
 /*
 Konfigurationsdatei:
 Hier wird festlegt als was das Modul geflasht wird.
@@ -16,14 +15,11 @@ Die Funktionien der einzelen Module sind hier definiert.
 /* Module */
 #define MESSMODUL
 
-
 //#define TELEMETRY
 #define MASTER
 
-
-
 #ifdef MESSMODUL
-#define HCLA 
+#define HCLA
 
 /* Define identifying  CAN addresses for
 the measurement modules
@@ -34,45 +30,32 @@ than one massage for sending its data  */
 #define MESSMODUL_ID 0x01
 #define MESSMODUL_ID_EXT 0x11
 
-
 //name of the module, max 8 characters long
 #define MOD_NAME "winglet"
 
-
-
-
-
-
-
 #endif
-
 
 #ifdef MASTER
 #define HCLA
 #define MAVLINK
 #define SD_LOG
 #define CANBUS
-#define MASTER_ID 0x99
+#define MASTER_ID 0x00
+#define MASTER_NAME "AK-Logger Master"
 //#define GPS
 #ifdef GPS
 #define SERIAL_GPS Serial2
 #endif
 
-
 #define CH_AIRSPEED  0x00
 #define CH_ATTACK	 0x01
 #define CH_SLIP	     0x02
-
-
 
 //SD-Card Definitions:
 #define SS_PIN 14
 #define BASE_FILENAME "Logger.dat"
 
-
-
 #endif
-
 
 #ifdef TELEMETRY
 
@@ -80,8 +63,7 @@ than one massage for sending its data  */
 
 #ifdef HCLA
 
-
-#define SENSOR0	 0 
+#define SENSOR0	 0
 #define SENSOR1	 1
 #define SENSOR2	 2
 //#define SENSOR3 3
@@ -90,21 +72,6 @@ than one massage for sending its data  */
 //#define SENSOR6 6
 //#define SENSOR7 7
 
-
-
-
-
 #endif
-
-
-
-
-
-
-
-
-
-
-
 
 #endif // !1
