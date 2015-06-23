@@ -1,16 +1,37 @@
 #include "sensor.h"
+#include "config.h"
+#include "stdlib.h"
+
+#define NUMBER_OF_CHANNELS 6
 
 //counting var for generating the channel array
 int ch_stat = 0;
 
 sensor::sensor(){
-#ifdef HCLA
+
+}
+
+void sensor::begin(){
 	Wire.begin(I2C_MASTER, 0x00, I2C_PINS_18_19, I2C_PULLUP_EXT, I2C_RATE_400);
+#ifdef DEBUGING
+	Serial.println("I2C online");
+#endif //DEBUGGING
+
+
+
+
+
+
+
+
 
 #ifdef SENSOR0
+
+
 	sensor::setCh(SENSOR0);
 #endif
 #ifdef SENSOR1
+
 	sensor::setCh(SENSOR1);
 #endif
 #ifdef SENSOR2
@@ -18,6 +39,7 @@ sensor::sensor(){
 #endif // SENSOR2
 
 #ifdef SENSOR3
+
 	sensor::setCh(SENSOR3);
 #endif
 #ifdef SENSOR4
@@ -33,11 +55,9 @@ sensor::sensor(){
 	sensor::setCh(SENSOR7);
 #endif
 
-#endif
+	ch_size = ch_stat;
 
-#ifdef MPU9150
 
-#endif
 }
 
 uint16_t sensor::readHCLA(int channel){
@@ -87,9 +107,22 @@ float airspeed;
 return airspeed;
 }
 */
+
+
 //generates an array which contains the sensor channel numbers
 void sensor::setCh(int chnum){
-	channels = new int;
+
+
+
+	channels = (uint8_t *)(realloc(channels, ch_stat*sizeof(uint8_t)));
+	if (channels == 0){
+#ifdef DEBUGING
+		Serial.println("no free memory");
+#endif
+	}
 	channels[ch_stat] = chnum;
+
+
 	ch_stat++;
 }
+

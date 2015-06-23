@@ -8,7 +8,8 @@ sowie die Implemntierug der Weitergabe von Fehlermeldungen
 
 #include "config.h"
 #include "sensor.h"
-#include "mavlink/mavlink.h"
+
+
 
 class serial
 {

@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include "WString.h"
+
 
 /*
 Konfigurationsdatei:
@@ -16,10 +16,11 @@ Die Funktionien der einzelen Module sind hier definiert.
 #define MESSMODUL
 
 //#define TELEMETRY
-#define MASTER
+//#define MASTER
 
 #ifdef MESSMODUL
 #define HCLA
+#define DEBUGING
 
 /* Define identifying  CAN addresses for
 the measurement modules
@@ -31,17 +32,23 @@ than one massage for sending its data  */
 #define MESSMODUL_ID_EXT 0x11
 
 //name of the module, max 8 characters long
-#define MOD_NAME "winglet"
+#define MOD_NAME "mitte"
 
 #endif
 
 #ifdef MASTER
 #define HCLA
-#define MAVLINK
-#define SD_LOG
+//#define MAVLINK
+//#define SD_LOG
+#define DEBUGING
 #define CANBUS
+
+
+
+
 #define MASTER_ID 0x00
 #define MASTER_NAME "AK-Logger Master"
+#define MAX_MODULES 20
 //#define GPS
 #ifdef GPS
 #define SERIAL_GPS Serial2
@@ -75,3 +82,4 @@ than one massage for sending its data  */
 #endif
 
 #endif // !1
+
