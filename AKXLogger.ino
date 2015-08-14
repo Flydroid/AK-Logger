@@ -3,18 +3,19 @@
 
 
 
-
-//#include <Time.h>
 #include "config.h"
 
+#ifdef CANBUS
 void send_broadcast();
-int compareModules(const void* mod1, const void* mod2);
+#endif
+#ifdef TELEMETRY
 void send_telemetry();
+#endif
 
 
 
 #ifdef MAVLINK
-#include "mavlink.h"
+
 #include "serial.h"
 
 serial mav;
@@ -23,8 +24,8 @@ serial mav;
 
 #ifdef SD_LOG
 #include "SdFat.h"
-SdFat SD;
-SdFile SD_File;
+SdFat sd;
+SdFile sd_file;
 
 #endif
 
@@ -33,13 +34,13 @@ SdFile SD_File;
 TinyGPSPlus gps;
 #endif
 
-
-
+#ifdef CANBUS
 #include <FlexCAN.h>
 #include "canbus.h"
 canbus cbus;
 CAN_message_t c_msg;
 CAN_message_t c_msg2;
+#endif
 
 
 
@@ -64,10 +65,15 @@ struct MODULE{
 }tmp, module_data[MAX_MODULES];
 
 //Define timer and volatiles timing control
+#ifdef CANBUS
 IntervalTimer broadcast;
-IntervalTimer telemetry;
 volatile bool c_broadcast;
+#endif //CANBUS
+
+#ifdef TELEMETRY
 volatile bool c_telemetry;
+IntervalTimer telemetry;
+#endif
 
 #endif
 
@@ -92,9 +98,7 @@ void send_broadcast(){
 	c_broadcast = true;
 }
 
-int compareModules(const void* mod1, const void* mod2){
-	return ((MODULE*)mod1)->ID - ((MODULE*)mod2)->ID;
-}
+
 #endif //CANBUS
 #ifdef TELEMETRY
 void send_telemetry(){
@@ -112,23 +116,26 @@ void setup(){
 	digitalWrite(13, HIGH);
 	delay(2000);
 	digitalWrite(13, LOW);
-	Serial.begin(115200);
+	Serial.begin(9600);
 	Serial.println("Serial online");
-#define SD_File Serial
+//#define SD_File Serial
 #endif	//DEBUG
 
 #ifdef MASTER
 
 	//SD card
 #ifdef SD_LOG
-	SD.begin(SS_PIN, SPI_FULL_SPEED);
+	sd.begin(SS_PIN, SPI_HALF_SPEED);
 	char fileName[11] = BASE_FILENAME;
 	//fileName[0] = datetime.date;
 	//+datetime.time + BASE_FILENAME;
 
-	if (!SD_File.open(fileName, O_WRITE | O_APPEND | O_CREAT)){
+	if (!sd_file.open("Logger.dat", O_RDWR | O_CREAT | O_AT_END)){
 		//error handling
+		Serial.println("SD open fail");
 	}
+	
+
 #endif // SD_LOG
 
 #ifdef HCLA
@@ -160,6 +167,7 @@ void setup(){
 	if during 1000 milliseconds no module checks in, all modules are accounted for
 	--->>> Check during testing
 	*/
+	
 #ifdef CANBUS
 
 	int m_num = 0;
@@ -195,7 +203,6 @@ void setup(){
 	Serial.println("All modules checkedin");
 	//sort the check-in modules according their id' value
 
-	qsort(module_data, sizeof(module_data), sizeof(MODULE), compareModules);
 	/*int max = 5;
 
 	bool change;
@@ -220,54 +227,61 @@ void setup(){
 		module_data[i + 1] = module_data[i];
 		module_data[i + 2] = tmp;
 	}
+
+#endif //CANBUS
+	
+	 
 #ifdef HCLA
 	//Write Master sensor data to module_date[0x00]
 	module_data[MASTER_ID].ID = MASTER_ID;
 	module_data[MASTER_ID].NAME = MASTER_NAME;
 	module_data[MASTER_ID].SENSOR_NUMBER = hcla.ch_size;
-
+	Serial.println("Moduledata ok");
+	
 #endif // HCLA
 
 	//Start display, show module name and state
-
+	
 	//Write FileHeader
-	SD_File.print("AK-X Logger v.1/nLogdatei vom: ");
-	//SD_File.print(datetime.date);
-	SD_File.print("um");
-	//SD_File.print(datetime.time);
-	SD_File.print("/nEingeckete Module");
-	for (uint16_t i = 1; i < sizeof(module_data); i++){
-		SD_File.print(module_data[i].NAME);
+	sd_file.print("AK-X Logger v.1 \n Logdatei vom: ");
+	
+	sd_file.print("um");
+	
+	sd_file.print("\n Eingeckete Module");
+	for (uint16_t i = 0; i < MAX_MODULES; i++){
+		sd_file.print(module_data[i].NAME);
 
-		SD_File.print(module_data[i].ID);
-		SD_File.print(" Sensoren=");
-		SD_File.print(module_data[i].SENSOR_NUMBER);
-		SD_File.print("/n");
+		sd_file.print(module_data[i].ID);
+		sd_file.print(" Sensoren=");
+		sd_file.print(module_data[i].SENSOR_NUMBER);
+		sd_file.print("\n");
 	}
-	SD_File.print("/nLogdaten:/n");
-	for (uint16_t i = 1; i < sizeof(module_data); i++){
-		SD_File.print(module_data[i].NAME);
+	sd_file.print("\n Logdaten: \n");
+	for (uint16_t i = 0; i < MAX_MODULES; i++){
+		sd_file.print(module_data[i].NAME);
 		for (int x = 1; x < module_data[i].SENSOR_NUMBER; x++){
 		}
 	}
-	SD_File.print("/nZeit [ms]\t");
-	for (uint16_t i = 1; i < sizeof(module_data); i++){
-		SD_File.print(module_data[i].NAME);
-		SD_File.print("\t");
+	sd_file.print("\n Zeit [ms]\t");
+	for (uint16_t i = 0; i < MAX_MODULES; i++){
+		sd_file.print(module_data[i].NAME);
+		sd_file.print("\t");
 		for (int x = 1; x <= module_data[i].SENSOR_NUMBER; x++){
-			SD_File.print("S");
-			SD_File.print(x);
-			SD_File.print("/t");
+			sd_file.print("S");
+			sd_file.print(x);
+			sd_file.print("\t");
 		}
 	}
-	SD_File.print("/n");
+	sd_file.print("\n");
+	sd_file.close();
+	Serial.println("File closed.");
 	//Close File
 
 #ifdef SD_LOG
-	SD_File.close();
+	//sd_file.close();
 #endif
+	//Serial.println("SD Header ok");
 
-#endif // CANBUS
 
 #endif
 
@@ -323,10 +337,14 @@ void loop(){
 
 
 		//get time
-		SD_File.print(millis());
-		SD_File.print("\t");
+		sd_file.print(millis());
+		sd_file.print("\t");
 	}
 #endif // CANBUS
+#ifdef DEBUGING
+	delay(500);
+	Serial.println("measure hcla");
+#endif
 #ifdef HCLA
 	//read the master sensors
 	for (uint16_t i = 0; i < hcla.ch_size; i++){
@@ -358,10 +376,11 @@ void loop(){
 		}
 		module_data[msg.id].READ_STATE = 1;
 	}
+#endif // CANBUS
 
 	//save data to string
 	String datastring;
-	for (int i = 0; i < sizeof(module_data); i++){
+	for (int i = 0; i < MAX_MODULES; i++){
 		for (int p = 0; p < module_data[i].SENSOR_NUMBER; p++){
 			uint16_t data = (int)(module_data[i].data1[0 + p]) << 8 | module_data[i].data1[1 + p];
 			datastring += String(data) + "\t";
@@ -370,14 +389,21 @@ void loop(){
 
 	datastring += "\n";
 	//store datastring
-	SD_File.print(datastring);
+	if (!sd_file.open("Logger.dat", O_RDWR | O_CREAT | O_AT_END)){
+		//error handling
+		Serial.println("SD open fail");
+	}
+	sd_file.print(datastring);
+	sd_file.close();
 
+#ifdef CANBUS
 	noInterrupts();
 	c_broadcast = false;
 	interrupts();
+#endif
 
 
-#endif // CANBUS
+
 
 
 #ifdef MAVLINK

@@ -1,8 +1,7 @@
 #include "sensor.h"
 #include "config.h"
-#include "stdlib.h"
+#include <stdlib.h>
 
-#define NUMBER_OF_CHANNELS 6
 
 //counting var for generating the channel array
 int ch_stat = 0;

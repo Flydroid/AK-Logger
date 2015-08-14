@@ -23,8 +23,10 @@ public:
 private:
 	int system_type;
 	int autopilot_type;
+#ifdef MAVLINK
 	mavlink_message_t msg;
 	uint8_t buf[MAVLINK_MAX_PACKET_LEN];
+#endif
 };
 
 #endif // !SERIAL_H

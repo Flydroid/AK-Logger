@@ -15,7 +15,8 @@ Statischer Drucksensor
 
 #include "config.h"
 #include "i2c_t3.h"
-#include "mavlink.h"
+
+
 
 
 /* Senoren:*/

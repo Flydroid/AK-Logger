@@ -13,10 +13,10 @@ Die Funktionien der einzelen Module sind hier definiert.
 */
 
 /* Module */
-#define MESSMODUL
+//#define MESSMODUL
 
 //#define TELEMETRY
-//#define MASTER
+#define MASTER
 
 #ifdef MESSMODUL
 #define HCLA
@@ -39,16 +39,16 @@ than one massage for sending its data  */
 #ifdef MASTER
 #define HCLA
 //#define MAVLINK
-//#define SD_LOG
+#define SD_LOG
 #define DEBUGING
-#define CANBUS
+//#define CANBUS
 
 
 
 
 #define MASTER_ID 0x00
 #define MASTER_NAME "AK-Logger Master"
-#define MAX_MODULES 20
+#define MAX_MODULES 1
 //#define GPS
 #ifdef GPS
 #define SERIAL_GPS Serial2
