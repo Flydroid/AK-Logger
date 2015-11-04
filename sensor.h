@@ -40,7 +40,7 @@ public:
 	uint16_t readHCLA(int channel);
 	void begin();
 	float calc_airspeed();
-	uint8_t* channels;
+	uint8_t channels[8];
 	void setCh(int chnum);
 	void SelectChannel(int channel);
 	uint8_t ch_size;

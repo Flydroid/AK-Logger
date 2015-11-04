@@ -2,30 +2,22 @@
 #include "config.h"
 #include <stdlib.h>
 
-
 //counting var for generating the channel array
 int ch_stat = 0;
 
-sensor::sensor(){
-
+sensor::sensor() {
+	pinMode(s0, OUTPUT);
+	pinMode(s1, OUTPUT);
+	pinMode(s2, OUTPUT);
 }
 
-void sensor::begin(){
+void sensor::begin() {
 	Wire.begin(I2C_MASTER, 0x00, I2C_PINS_18_19, I2C_PULLUP_EXT, I2C_RATE_400);
 #ifdef DEBUGING
 	Serial.println("I2C online");
 #endif //DEBUGGING
 
-
-
-
-
-
-
-
-
 #ifdef SENSOR0
-
 
 	sensor::setCh(SENSOR0);
 #endif
@@ -35,7 +27,7 @@ void sensor::begin(){
 #endif
 #ifdef SENSOR2
 	sensor::setCh(SENSOR2);
-#endif // SENSOR2
+#endif
 
 #ifdef SENSOR3
 
@@ -55,11 +47,9 @@ void sensor::begin(){
 #endif
 
 	ch_size = ch_stat;
-
-
 }
 
-uint16_t sensor::readHCLA(int channel){
+uint16_t sensor::readHCLA(int channel) {
 	sensor::SelectChannel(channel);
 
 	uint8_t msb, lsb;
@@ -67,17 +57,18 @@ uint16_t sensor::readHCLA(int channel){
 	Wire.requestFrom(PRESSURE_SENSOR_ADRESS, 2, I2C_STOP);
 	msb = Wire.readByte();
 	lsb = Wire.readByte();
-	if (Wire.getError() == 0){
-		return rawPressure = (int)(msb << 8) | lsb;
+	rawPressure = (int)(msb << 8) | lsb;
+	if (Wire.getError() == 0) {
+		return rawPressure;
 	}
-	else{
+	else {
 		return 0;
 		//Error Funktion
 	}
 }
 
 //channel select für 8 Kanäle
-void sensor::SelectChannel(int channel){
+void sensor::SelectChannel(int channel) {
 	int controlPin[] = { s0, s1, s2 };
 
 	int muxChannel[8][3] = {
@@ -92,7 +83,7 @@ void sensor::SelectChannel(int channel){
 	};
 
 	//loop through the 3 controllpins
-	for (int i = 0; i < 3; i++){
+	for (int i = 0; i < 3; i++) {
 		digitalWrite(controlPin[i], muxChannel[channel][i]);
 	}
 }
@@ -107,21 +98,8 @@ return airspeed;
 }
 */
 
-
 //generates an array which contains the sensor channel numbers
-void sensor::setCh(int chnum){
-
-
-
-	channels = (uint8_t *)(realloc(channels, ch_stat*sizeof(uint8_t)));
-	if (channels == 0){
-#ifdef DEBUGING
-		Serial.println("no free memory");
-#endif
-	}
+void sensor::setCh(int chnum) {
 	channels[ch_stat] = chnum;
-
-
 	ch_stat++;
 }
-
