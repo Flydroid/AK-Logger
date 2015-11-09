@@ -1,3 +1,4 @@
+
 #include "config.h"
 
 #ifdef CANBUS
@@ -45,6 +46,27 @@ sensor hcla;
 #endif
 
 #ifdef MASTER
+//Set up Time functions
+#include <Time.h>
+time_t getTeensy3Time()
+{
+	return Teensy3Clock.get();
+}
+uint8_t monthhelper(char* month) {
+	for (int i = 1; i <= 12;) {
+		if (!strcmp(month, monthShortStr(i))) {
+			return i;
+		}
+		else
+		{
+			i++;
+		}
+	}
+}
+void SetTimeCompile();
+TimeElements tm;
+
+
 
 //struct with all information on a connected module
 struct MODULE {
@@ -56,7 +78,7 @@ struct MODULE {
 	uint16_t data1[8];
 	uint16_t data2[8];
 	uint8_t SENSOR_NUMBER;
-}tmp, module_data[MAX_MODULES+1];
+}tmp, module_data[MAX_MODULES + 1];
 
 //Define timer and volatiles timing control
 #ifdef CANBUS
@@ -118,6 +140,9 @@ void setup() {
 #endif	//DEBUG
 
 #ifdef MASTER
+	//Sync Time after compile
+	setSyncProvider(getTeensy3Time);
+	SetTimeCompile();
 
 
 	//SD card
@@ -211,7 +236,7 @@ void setup() {
 	change = 0;
 	}*/
 
-	
+
 
 #endif //CANBUS
 
@@ -235,7 +260,7 @@ void setup() {
 	for (uint16_t i = 0; i < checkedin_Modules; i++) {
 		sd_file.print(module_data[i].NAME);
 		sd_file.print(" ID: ");
-		sd_file.print(module_data[i].ID,HEX);
+		sd_file.print(module_data[i].ID, HEX);
 		sd_file.print(" mit ");
 		sd_file.print(module_data[i].SENSOR_NUMBER);
 		sd_file.print(" Sensoren\n");
@@ -330,7 +355,7 @@ void loop() {
 #ifdef CANBUS
 
 		//read measurement modules
-		for (uint16_t recv_data = 1; recv_data < checkedin_Modules-1; recv_data++) {
+		for (uint16_t recv_data = 1; recv_data < checkedin_Modules - 1; recv_data++) {
 			CAN_message_t msg, msg2;
 			cbus.read(msg);
 			if (!module_data[msg.id].READ_STATE) {
@@ -340,7 +365,7 @@ void loop() {
 				uint8_t msb, lsb;
 				msb = msg.buf[i];
 				lsb = msg.buf[i + 1];
-				module_data[msg.id].data1[i/2] = msb << 8 | lsb;
+				module_data[msg.id].data1[i / 2] = msb << 8 | lsb;
 			}
 			if (module_data[msg.id].ID_EXT != 0x00) {
 				cbus.read(msg2);
@@ -349,7 +374,7 @@ void loop() {
 						uint8_t msb, lsb;
 						msb = msg.buf[i];
 						lsb = msg.buf[i + 1];
-						module_data[msg.id].data1[4+(i / 2)] = msb << 8 | lsb;
+						module_data[msg.id].data1[4 + (i / 2)] = msb << 8 | lsb;
 					}
 				}
 				else {
@@ -361,7 +386,7 @@ void loop() {
 #endif // CANBUS
 
 		//save data to string
-		
+
 		for (int i = 0; i < checkedin_Modules; i++) {
 			for (int p = 0; p < module_data[i].SENSOR_NUMBER; p++) {
 				uint16_t data = (int)(module_data[i].data1[p]);
@@ -446,4 +471,43 @@ void loop() {
 		}
 	}
 #endif
+}
+
+void SetTimeCompile() {
+	char hour[2], seconds[2], minute[2], month[3], day[2], year[4];
+	for (int i = 0; i < 2; i++) {
+		hour[i] = TIME[i];
+		minute[i] = TIME[i + 3];
+		seconds[i] = TIME[i + 6];
+	}
+	for (int i = 0; i < 3; i++) {
+		month[i] = DATE[i];
+	}
+	for (int i = 0; i < 2; i++) {
+		day[i] = DATE[i + 4];
+	}
+	for (int i = 0; i < 4; i++) {
+		year[i] = DATE[i + 7];
+	}
+
+	tm.Hour = atoi(hour);
+	tm.Minute = atoi(minute);
+	tm.Second = atoi(seconds);
+	tm.Month = monthhelper(month);
+	tm.Day = atoi(day);
+	tm.Year = atoi(year)-1970;
+	time_t t = makeTime(tm);
+	if (t != 0 && t > Teensy3Clock.get()) {
+		Teensy3Clock.set(t); // set the RTC
+		setTime(t);
+#ifdef DEBUGING
+		Serial.println("RTC mit Compile Time in sync");
+#endif
+	}
+	else
+	{
+		t = Teensy3Clock.get();
+		setTime(t);
+		
+	}
 }

@@ -23,17 +23,33 @@ Die Funktionien der einzelen Module sind hier definiert.
 #define DEBUGING
 #define CANBUS
 
+
 /* Define identifying  CAN addresses for
 the measurement modules
 0x00 is reserved ID for the master module
 The MESSMODUL_ID is counted from 0x01 to 0x10
 The extended ID is for Modules which need more
 than one massage for sending its data  */
+#ifdef MESSMODUL1
 #define MESSMODUL_ID 0x01
 #define MESSMODUL_ID_EXT 0x11
-
 //name of the module, max 8 characters long
 #define MOD_NAME "mitte"
+#endif
+#ifdef MESSMODUL2
+#define MESSMODUL_ID 0x02
+#define MESSMODUL_ID_EXT 0x22
+//name of the module, max 8 characters long
+#define MOD_NAME "Flügel"
+#endif
+#ifdef MESSMODUL3
+#define MESSMODUL_ID 0x03
+#define MESSMODUL_ID_EXT 0x33
+//name of the module, max 8 characters long
+#define MOD_NAME "winglet"
+#endif
+
+
 
 #endif
 
@@ -45,7 +61,8 @@ than one massage for sending its data  */
 #define CANBUS
 
 
-
+#define TIME __TIME__
+#define DATE __DATE__
 
 #define MASTER_ID 0x00
 #define MASTER_NAME "AK-Logger Master"
