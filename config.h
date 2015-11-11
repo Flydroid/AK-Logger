@@ -12,6 +12,7 @@ Die Funktionien der einzelen Module sind hier definiert.
 
 */
 
+#include "SdFat.h"
 /* Module */
 //#define MESSMODUL
 
@@ -56,7 +57,7 @@ than one massage for sending its data  */
 #ifdef MASTER
 #define HCLA
 //#define MAVLINK
-//#define SD_LOG
+#define SD_LOG
 #define DEBUGING
 #define CANBUS
 
@@ -78,7 +79,7 @@ than one massage for sending its data  */
 
 //SD-Card Definitions:
 #define SS_PIN 14
-#define BASE_FILENAME "Logger.dat"
+#define BASE_FILENAME "AKXLogger"
 
 #endif
 

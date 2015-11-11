@@ -23,9 +23,16 @@ Statischer Drucksensor
 
 #define PRESSURE_SENSOR_ADRESS 0x78
 //Multiplexer Kontrollpins, für Messmodul angepasst
+#ifdef MASTER
+#define s0	6
+#define s1	5
+#define s2	2
+#endif
+#ifdef MESSMODUL
 #define s0	10
 #define s1	11
 #define s2	12
+#endif
 
 
 

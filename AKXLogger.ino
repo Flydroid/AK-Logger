@@ -16,14 +16,13 @@ serial mav;
 
 #endif
 
-
-
-
 #ifdef SD_LOG
 #include "SdFat.h"
 SdFat sd;
 SdFile sd_file;
-
+ArduinoOutStream cout(sd_file);
+const uint8_t BASE_NAME_SIZE = sizeof(BASE_FILENAME) - 1;
+char fileName[16] = BASE_FILENAME "00.csv";
 #endif
 
 #ifdef GPS
@@ -46,6 +45,7 @@ sensor hcla;
 #endif
 
 #ifdef MASTER
+#include <EEPROM.h>
 //Set up Time functions
 #include <Time.h>
 time_t getTeensy3Time()
@@ -65,6 +65,8 @@ uint8_t monthhelper(char* month) {
 }
 void SetTimeCompile();
 TimeElements tm;
+
+
 
 
 
@@ -91,7 +93,9 @@ volatile bool c_telemetry;
 IntervalTimer telemetry;
 #endif
 
-#ifndef SDLOG
+#ifndef SD_LOG
+
+ArduinoOutStream cout(Serial);
 #define sd_file Serial
 #endif //SDLOG
 
@@ -144,18 +148,31 @@ void setup() {
 	setSyncProvider(getTeensy3Time);
 	SetTimeCompile();
 
-
 	//SD card
 #ifdef SD_LOG
 	sd.begin(SS_PIN, SPI_HALF_SPEED);
-	char fileName[11] = BASE_FILENAME;
-	//fileName[0] = datetime.date;
-	//+datetime.time + BASE_FILENAME;
+	// Find an unused file name.
+	while (sd.exists(fileName)) {
+		if (fileName[BASE_NAME_SIZE + 1] != '9') {
+			fileName[BASE_NAME_SIZE + 1]++;
+		}
+		else if (fileName[BASE_NAME_SIZE] != '9') {
+			fileName[BASE_NAME_SIZE + 1] = '0';
+			fileName[BASE_NAME_SIZE]++;
+		}
+		else {
+			Serial.println("can't create filename");
+		}
+	}
 
-	if (!sd_file.open("Logger.dat", O_RDWR | O_CREAT | O_AT_END)) {
+	if (!sd_file.open(fileName, O_RDWR | O_CREAT | O_AT_END)) {
 		//error handling
 		Serial.println("SD open fail");
 	}
+	if (!sd_file.timestamp(T_CREATE, year(), month(), day(), hour(), minute(), second())) {
+		Serial.println("Write timestamp fail");
+	}
+
 
 #endif // SD_LOG
 
@@ -214,7 +231,6 @@ void setup() {
 		}
 	}
 	checkedin_Modules = m_num;
-
 	Serial.println("All modules checkedin");
 	//sort the check-in modules according their id' value
 
@@ -236,8 +252,6 @@ void setup() {
 	change = 0;
 	}*/
 
-
-
 #endif //CANBUS
 
 #ifdef HCLA
@@ -250,13 +264,12 @@ void setup() {
 #endif // HCLA
 
 	//Start display, show module name and state
+	//get time
 
 	//Write FileHeader
-	sd_file.print("AK-X Logger v.1 \n Logdatei vom: ");
-
-	sd_file.print("um");
-
-	sd_file.print("\n Eingeckete Module\n");
+	cout << "AK-X Logger v.1 \n Logdatei vom: ";
+	cout << day() << "." << month() << "." << year() << " um " << hour() << ":" << minute() << "Uhr";
+	cout << "\n Eingecheckte Module\n";
 	for (uint16_t i = 0; i < checkedin_Modules; i++) {
 		sd_file.print(module_data[i].NAME);
 		sd_file.print(" ID: ");
@@ -283,7 +296,8 @@ void setup() {
 	}
 	sd_file.print("\n");
 	//Close File
-#ifdef SDLOG
+#ifdef SD_LOG
+
 	sd_file.close();
 	Serial.println("File closed.");
 #endif
@@ -348,7 +362,7 @@ void loop() {
 
 #ifdef HCLA
 		//read the master sensors
-		for (uint16_t i = 0; i < module_data[MASTER_ID].SENSOR_NUMBER; i++) {
+		for (int i = 0; i < module_data[MASTER_ID].SENSOR_NUMBER; i++) {
 			module_data[0].data1[i] = hcla.readHCLA(hcla.channels[i]);
 		}
 #endif
@@ -396,14 +410,17 @@ void loop() {
 
 		datastring += "\n";
 		//store datastring
-#ifdef SDLOG
-		if (!sd_file.open("Logger.dat", O_RDWR | O_CREAT | O_AT_END)) {
+#ifdef SD_LOG
+		if (!sd_file.open(fileName, O_RDWR | O_AT_END )) {
 			//error handling
 			Serial.println("SD open fail");
 		}
+
 #endif
 		sd_file.print(datastring);
-#ifdef SDLOG
+		
+#ifdef SD_LOG
+		sd_file.timestamp(T_WRITE, year(), month(), day(), hour(), minute(), second());
 		sd_file.close();
 #endif
 
@@ -412,7 +429,6 @@ void loop() {
 		c_broadcast = false;
 		interrupts();
 #endif
-
 	}
 
 #ifdef MAVLINK
@@ -495,19 +511,38 @@ void SetTimeCompile() {
 	tm.Second = atoi(seconds);
 	tm.Month = monthhelper(month);
 	tm.Day = atoi(day);
-	tm.Year = atoi(year)-1970;
+	tm.Year = atoi(year) - 1970;
 	time_t t = makeTime(tm);
-	if (t != 0 && t > Teensy3Clock.get()) {
-		Teensy3Clock.set(t); // set the RTC
-		setTime(t);
+	time_t datetime = 0;
+	datetime += (EEPROM.read(0x00) << 24);
+	datetime += (EEPROM.read(0x01) << 16);
+	datetime += (EEPROM.read(0x02) << 8);
+	datetime += EEPROM.read(0x03);
+	int n = memcmp(&t, &datetime, 4);
+	if (n > 0 || n < 0) {
+		Teensy3Clock.set(t); // set the RTC  with time at compile
+		EEPROM.write(0x00, (t & 0xFF000000) >> 24);
+		EEPROM.write(0x01, (t & 0x00FF0000) >> 16);
+		EEPROM.write(0x02, (t & 0x0000FF00) >> 8);
+		EEPROM.write(0x03, (t & 0x000000FF));
+	}
+	t = Teensy3Clock.get();
+	setTime(t);
+
 #ifdef DEBUGING
-		Serial.println("RTC mit Compile Time in sync");
-#endif
-	}
-	else
+	switch (timeStatus())
 	{
-		t = Teensy3Clock.get();
-		setTime(t);
-		
+	case timeNotSet:
+		Serial.println("timenotSet");
+		break;
+	case timeSet:
+		Serial.println("timeset");
+		break;
+	case timeNeedsSync:
+		Serial.println("timeneedssync");
+		break;
+	default:
+		break;
 	}
+#endif
 }

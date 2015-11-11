@@ -6,12 +6,13 @@
 int ch_stat = 0;
 
 sensor::sensor() {
-	pinMode(s0, OUTPUT);
-	pinMode(s1, OUTPUT);
-	pinMode(s2, OUTPUT);
+	
 }
 
 void sensor::begin() {
+	pinMode(s0, OUTPUT);
+	pinMode(s1, OUTPUT);
+	pinMode(s2, OUTPUT);
 	Wire.begin(I2C_MASTER, 0x00, I2C_PINS_18_19, I2C_PULLUP_EXT, I2C_RATE_400);
 #ifdef DEBUGING
 	Serial.println("I2C online");
@@ -69,7 +70,7 @@ uint16_t sensor::readHCLA(int channel) {
 
 //channel select für 8 Kanäle
 void sensor::SelectChannel(int channel) {
-	int controlPin[] = { s0, s1, s2 };
+	int controlPin[3] = { s0, s1, s2 };
 
 	int muxChannel[8][3] = {
 		{ 0, 0, 0 }, //channel 0
