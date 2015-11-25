@@ -1,5 +1,6 @@
 
 #include "config.h"
+#include <EEPROM.h>
 
 #ifdef CANBUS
 void send_broadcast();
@@ -45,7 +46,7 @@ sensor hcla;
 #endif
 
 #ifdef MASTER
-#include <EEPROM.h>
+
 //Set up Time functions
 #include <Time.h>
 time_t getTeensy3Time()
@@ -73,7 +74,7 @@ TimeElements tm;
 //struct with all information on a connected module
 struct MODULE {
 	uint8_t ID;
-	uint8_t	ID_EXT = 0x00;
+	uint8_t	ID2 = 0x00;
 	uint8_t SYSTEM_STATE;
 	String NAME;
 	bool READ_STATE = 0;
@@ -110,6 +111,10 @@ struct SYSTEM {
 	uint8_t ERROR = 2;
 } SYSTEM_STATE;
 
+int MESSMODUL_ID;
+int MESSMODUL_ID2;
+char* MESSMODUL_NAME;
+
 #endif
 
 /*
@@ -142,6 +147,31 @@ void setup() {
 	Serial.begin(9600);
 	Serial.println("Serial online");
 #endif	//DEBUG
+
+#ifdef MESSMODUL
+	switch (EEPROM.read(0x00)){
+	case MESSMODUL1_ID:
+		MESSMODUL_ID = MESSMODUL1_ID;
+		MESSMODUL_ID2 = MESSMODUL1_ID2;
+		MESSMODUL_NAME = MESSMODUL1_NAME;
+		break;
+	case MESSMODUL2_ID:
+		MESSMODUL_ID = MESSMODUL2_ID;
+		MESSMODUL_ID2 = MESSMODUL2_ID2;
+		MESSMODUL_NAME = MESSMODUL2_NAME;
+		break;
+	case MESSMODUL3_ID:
+		MESSMODUL_ID = MESSMODUL3_ID;
+		MESSMODUL_ID2 = MESSMODUL3_ID2;
+		MESSMODUL_NAME = MESSMODUL3_NAME;
+		break;
+	default:
+		break;
+	}
+#endif
+
+
+
 
 #ifdef MASTER
 	//Sync Time after compile
@@ -210,12 +240,12 @@ void setup() {
 	char m_tmp[8];
 	elapsedMillis m_checkin;
 
-	while (m_checkin < 1000) {
+	while (m_checkin < 10000) {
 		CAN_message_t msg;
-
+		//Serial.println(m_checkin);
 		if (cbus.read(msg)) {
 			module_data[m_num].ID = msg.buf[0];
-			module_data[m_num].ID_EXT = msg.buf[1];
+			module_data[m_num].ID2 = msg.buf[1];
 			module_data[m_num].SYSTEM_STATE = msg.buf[2];
 			for (int i = 0; i < 8; i++)
 			{
@@ -310,11 +340,11 @@ void setup() {
 
 	//wait for master to boot
 	digitalWrite(13, HIGH);
-	delay(1000);
+	delay(3000);
 	//announce module to master
 	c_msg.id = MESSMODUL_ID;
 	c_msg.buf[0] = MESSMODUL_ID;
-	c_msg.buf[1] = MESSMODUL_ID_EXT;
+	c_msg.buf[1] = MESSMODUL_ID2;
 	c_msg.buf[2] = SYSTEM_STATE.POWER_UP;
 	c_msg.buf[3] = hcla.ch_size;
 	c_msg.len = sizeof(c_msg.buf);
@@ -322,9 +352,9 @@ void setup() {
 #ifdef DEBUGING
 	Serial.println("msg1 send");
 #endif
-	c_msg2.id = MESSMODUL_ID_EXT;
+	c_msg2.id = MESSMODUL_ID2;
 	for (int i = 0; i < 8; i++) {
-		c_msg2.buf[i] = int(MOD_NAME[i]);
+		c_msg2.buf[i] = MESSMODUL_NAME[i];
 	}
 	c_msg2.len = 8;
 	cbus.write(c_msg2);
@@ -381,9 +411,9 @@ void loop() {
 				lsb = msg.buf[i + 1];
 				module_data[msg.id].data1[i / 2] = msb << 8 | lsb;
 			}
-			if (module_data[msg.id].ID_EXT != 0x00) {
+			if (module_data[msg.id].ID2 != 0x00) {
 				cbus.read(msg2);
-				if (msg2.id == module_data[msg.id].ID_EXT) {
+				if (msg2.id == module_data[msg.id].ID2) {
 					for (int i = 0; i < 8; i++) {
 						uint8_t msb, lsb;
 						msb = msg.buf[i];
@@ -458,11 +488,13 @@ void loop() {
 
 	cbus.read(c_msg);
 	if (c_msg.id == 0x00) {	   //0x00 is the MASTER_ID
+#ifdef DEBUGING
 		Serial.print("Got Broadcast");
+#endif
 		switch (c_msg.buf[0]) {
 		case 1:
 			c_msg.id = MESSMODUL_ID;
-			c_msg2.id = MESSMODUL_ID_EXT;
+			c_msg2.id = MESSMODUL_ID2;
 			for (uint16_t i = 0; i < hcla.ch_size; i++) {
 				uint16_t tmp = hcla.readHCLA(hcla.channels[i]);
 				if (i < 4) {
@@ -489,6 +521,7 @@ void loop() {
 #endif
 }
 
+#ifdef MASTER
 void SetTimeCompile() {
 	char hour[2], seconds[2], minute[2], month[3], day[2], year[4];
 	for (int i = 0; i < 2; i++) {
@@ -546,3 +579,4 @@ void SetTimeCompile() {
 	}
 #endif
 }
+#endif
