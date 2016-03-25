@@ -9,11 +9,16 @@ canbus::canbus(){
 	broadcast.len = sizeof(broadcast.buf);
 }
 
-void canbus::write(CAN_message_t msg){
+bool canbus::write(CAN_message_t msg){
 	if (can.write(msg) == 0){
 #ifdef DEBUGING
 		Serial.println("Massage not send");
 #endif
+		return 0;
+	}
+	else
+	{
+		return 1;
 	}
 }
 

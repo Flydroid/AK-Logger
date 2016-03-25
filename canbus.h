@@ -9,15 +9,14 @@ Klasse für die CAN-BUS Kommunikation
 Hier wird die CAN-BUS Funktionalität und die Logik für Master und Messmodule implemnetiert
 */
 
-
-#include <FlexCAN.h>
+#include "FlexCAN.h"
 
 class canbus
 {
 public:
 
 	canbus();
-	void write(CAN_message_t msg);
+	bool write(CAN_message_t msg);
 	bool read(CAN_message_t msg);
 	FlexCAN can;
 	CAN_message_t broadcast; //Startbefehl für die Messmodule

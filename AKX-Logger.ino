@@ -2,6 +2,8 @@
 #include "config.h"
 #include <EEPROM.h>
 
+
+
 #ifdef CANBUS
 void send_broadcast();
 #endif
@@ -32,7 +34,7 @@ TinyGPSPlus gps;
 #endif
 
 #ifdef CANBUS
-#include <FlexCAN.h>
+#include "FlexCAN.h"
 #include "canbus.h"
 canbus cbus;
 CAN_message_t c_msg;
@@ -142,33 +144,11 @@ void setup() {
 #ifdef DEBUGING
 	pinMode(13, OUTPUT);
 	digitalWrite(13, HIGH);
-	delay(2000);
-	digitalWrite(13, LOW);
 	Serial.begin(9600);
 	Serial.println("Serial online");
 #endif	//DEBUG
 
-#ifdef MESSMODUL
-	switch (EEPROM.read(0x00)){
-	case MESSMODUL1_ID:
-		MESSMODUL_ID = MESSMODUL1_ID;
-		MESSMODUL_ID2 = MESSMODUL1_ID2;
-		MESSMODUL_NAME = MESSMODUL1_NAME;
-		break;
-	case MESSMODUL2_ID:
-		MESSMODUL_ID = MESSMODUL2_ID;
-		MESSMODUL_ID2 = MESSMODUL2_ID2;
-		MESSMODUL_NAME = MESSMODUL2_NAME;
-		break;
-	case MESSMODUL3_ID:
-		MESSMODUL_ID = MESSMODUL3_ID;
-		MESSMODUL_ID2 = MESSMODUL3_ID2;
-		MESSMODUL_NAME = MESSMODUL3_NAME;
-		break;
-	default:
-		break;
-	}
-#endif
+
 
 
 
@@ -238,11 +218,16 @@ void setup() {
 
 	int m_num = 1;
 	char m_tmp[8];
+	c_msg.id = 0x00;
+	c_msg.buf[0] = 0;
+	c_msg.len = 8;
+	if (cbus.write(c_msg)) {
+		Serial.println("MasterMSGsend");
+	}
 	elapsedMillis m_checkin;
-
-	while (m_checkin < 10000) {
+	while (m_checkin < 1000) {
 		CAN_message_t msg;
-		//Serial.println(m_checkin);
+	//	Serial.println(m_checkin);
 		if (cbus.read(msg)) {
 			module_data[m_num].ID = msg.buf[0];
 			module_data[m_num].ID2 = msg.buf[1];
@@ -334,6 +319,8 @@ void setup() {
 #ifdef DEBUGING
 	Serial.println("SD Header ok");
 #endif
+	digitalWrite(13, LOW);
+
 #endif
 
 #ifdef MESSMODUL
@@ -341,6 +328,25 @@ void setup() {
 	//wait for master to boot
 	digitalWrite(13, HIGH);
 	delay(3000);
+	switch (EEPROM.read(0x00)) {
+	case MESSMODUL1_ID:
+		MESSMODUL_ID = MESSMODUL1_ID;
+		MESSMODUL_ID2 = MESSMODUL1_ID2;
+		MESSMODUL_NAME = MESSMODUL1_NAME;
+		break;
+	case MESSMODUL2_ID:
+		MESSMODUL_ID = MESSMODUL2_ID;
+		MESSMODUL_ID2 = MESSMODUL2_ID2;
+		MESSMODUL_NAME = MESSMODUL2_NAME;
+		break;
+	case MESSMODUL3_ID:
+		MESSMODUL_ID = MESSMODUL3_ID;
+		MESSMODUL_ID2 = MESSMODUL3_ID2;
+		MESSMODUL_NAME = MESSMODUL3_NAME;
+		break;
+	default:
+		break;
+	}
 	//announce module to master
 	c_msg.id = MESSMODUL_ID;
 	c_msg.buf[0] = MESSMODUL_ID;
@@ -348,9 +354,18 @@ void setup() {
 	c_msg.buf[2] = SYSTEM_STATE.POWER_UP;
 	c_msg.buf[3] = hcla.ch_size;
 	c_msg.len = sizeof(c_msg.buf);
+	c_msg2.id = 1;
+	while (c_msg2.id != 0x00) {
+		Serial.println("WaitingforMaster");
+		cbus.read(c_msg2);
+	}
+
 	cbus.write(c_msg);
-#ifdef DEBUGING
 	Serial.println("msg1 send");
+
+
+#ifdef DEBUGING
+
 #endif
 	c_msg2.id = MESSMODUL_ID2;
 	for (int i = 0; i < 8; i++) {
@@ -430,7 +445,6 @@ void loop() {
 #endif // CANBUS
 
 		//save data to string
-
 		for (int i = 0; i < checkedin_Modules; i++) {
 			for (int p = 0; p < module_data[i].SENSOR_NUMBER; p++) {
 				uint16_t data = (int)(module_data[i].data1[p]);
@@ -441,14 +455,14 @@ void loop() {
 		datastring += "\n";
 		//store datastring
 #ifdef SD_LOG
-		if (!sd_file.open(fileName, O_RDWR | O_AT_END )) {
+		if (!sd_file.open(fileName, O_RDWR | O_AT_END)) {
 			//error handling
 			Serial.println("SD open fail");
 		}
 
 #endif
 		sd_file.print(datastring);
-		
+
 #ifdef SD_LOG
 		sd_file.timestamp(T_WRITE, year(), month(), day(), hour(), minute(), second());
 		sd_file.close();
