@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Path>C:\\Program Files (x86)\\Python 2.7.11\\;C:\\Program Files (x86)\\Python 2.7.11\\Scripts;C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\;C:\\Program Files\\Microsoft\\Web Platform Installer\\;C:\\Program Files\\TyQt\\;C:\\Program Files (x86)\\MSBuild\\14.0\\Bin\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Skype\\Phone\\;C:\\Program Files (x86)\\md5sum\\md5sums.exe;C:\\Program Files\\MATLAB\\R2016a\\runtime\\win64;C:\\Program Files\\MATLAB\\R2016a\\bin;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\Git\\cmd;C:\\Program Files (x86)\\Python 3.5.1\\Scripts\\;C:\\Program Files (x86)\\Python 3.5.1\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Users\\Jonathan\\AppData\\Local\\atom\\bin;C:\\Program Files (x86)\\Python 2.7.11;C:\\Program Files (x86)\\Python 2.7.11\\Scripts</Path>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0FA9C3A8-452B-41EF-A418-9102B170F49F}</ProjectGuid>
+    <Keyword>MakeFileProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeBuildCommandLine>platformio -f -c visualstudio run</NMakeBuildCommandLine>
+    <NMakeCleanCommandLine>platformio -f -c visualstudio run --target clean</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>F_CPU=72000000L;USB_SERIAL;LAYOUT_US_ENGLISH;__MK20DX256__;ARDUINO=10600;TEENSYDUINO=127;PLATFORMIO=020806</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\cores\teensy3;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\cores\teensy3\avr;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\cores\teensy3\util;D:\Owncloud2\Jonathan Akaflieg\AK_Logger\AK-Logger\lib\FlexCAN;D:\Owncloud2\Jonathan Akaflieg\AK_Logger\AK-Logger\lib\SdFat;D:\Owncloud2\Jonathan Akaflieg\AK_Logger\AK-Logger\lib\SdFat\utility;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\SPI;D:\Owncloud2\Jonathan Akaflieg\AK_Logger\AK-Logger\lib\i2c_t3;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\EEPROM;$(HOMEDRIVE)$(HOMEPATH)\.platformio\lib\Time_ID44;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Audio\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Bounce;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Bridge\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Esplora\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Ethernet;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Firmata;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\LiquidCrystal;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\RobotIRremote\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Robot_Control\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Robot_Motor\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\SD;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Scheduler\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Servo;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\SoftwareSerial;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Stepper\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\TFT\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Temboo\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\USBHost\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\WiFi\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Wire;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\toolchain-gccarmnoneeabi\arm-none-eabi\include;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\toolchain-gccarmnoneeabi\lib\gcc\arm-none-eabi\4.8.4\include;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\toolchain-gccarmnoneeabi\lib\gcc\arm-none-eabi\4.8.4\include-fixed</NMakeIncludeSearchPath>
+    <NMakeReBuildCommandLine>platformio -f -c visualstudio run --target upload</NMakeReBuildCommandLine>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeBuildCommandLine>platformio run</NMakeBuildCommandLine>
+    <NMakeCleanCommandLine>platformio run --target clean</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>F_CPU=72000000L;USB_SERIAL;LAYOUT_US_ENGLISH;__MK20DX256__;ARDUINO=10600;TEENSYDUINO=127;PLATFORMIO=020806</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\cores\teensy3;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\cores\teensy3\avr;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\cores\teensy3\util;D:\Owncloud2\Jonathan Akaflieg\AK_Logger\AK-Logger\lib\FlexCAN;D:\Owncloud2\Jonathan Akaflieg\AK_Logger\AK-Logger\lib\SdFat;D:\Owncloud2\Jonathan Akaflieg\AK_Logger\AK-Logger\lib\SdFat\utility;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\SPI;D:\Owncloud2\Jonathan Akaflieg\AK_Logger\AK-Logger\lib\i2c_t3;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\EEPROM;$(HOMEDRIVE)$(HOMEPATH)\.platformio\lib\Time_ID44;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Audio\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Bounce;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Bridge\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Esplora\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Ethernet;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Firmata;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\LiquidCrystal;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\RobotIRremote\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Robot_Control\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Robot_Motor\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\SD;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Scheduler\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Servo;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\SoftwareSerial;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Stepper\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\TFT\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Temboo\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\USBHost\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\WiFi\src;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\framework-arduinoteensy\libraries\Wire;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\toolchain-gccarmnoneeabi\arm-none-eabi\include;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\toolchain-gccarmnoneeabi\lib\gcc\arm-none-eabi\4.8.4\include;$(HOMEDRIVE)$(HOMEPATH)\.platformio\packages\toolchain-gccarmnoneeabi\lib\gcc\arm-none-eabi\4.8.4\include-fixed</NMakeIncludeSearchPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <None Include="platformio.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\AK-Logger.ino">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\canbus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\canbus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\sensor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\sensor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\serial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\serial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
