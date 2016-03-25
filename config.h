@@ -17,7 +17,7 @@ Die Funktionien der einzelen Module sind hier definiert.
 //#define MESSMODUL
 
 //#define TELEMETRY
-//#define MASTER
+#define MASTER
 
 #ifdef MESSMODUL
 #define HCLA
