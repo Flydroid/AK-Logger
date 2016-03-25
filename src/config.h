@@ -14,7 +14,7 @@ Die Funktionien der einzelen Module sind hier definiert.
 
 #include "SdFat.h"
 /* Module */
-  
+
 
 //#define TELEMETRY
 #define MASTER

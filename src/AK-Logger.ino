@@ -6,6 +6,7 @@
 
 
 
+
 #ifdef CANBUS
 void send_broadcast();
 #endif
@@ -238,6 +239,7 @@ void setup() {
 	}
 	checkedin_Modules = m_num;
 	Serial.println("All modules checkedin");
+
 	//sort the check-in modules according their id' value
 
 	/*int max = 5;
