@@ -9,7 +9,7 @@ Klasse für die CAN-BUS Kommunikation
 Hier wird die CAN-BUS Funktionalität und die Logik für Master und Messmodule implemnetiert
 */
 
-#include "FlexCAN.h"
+#include "..\lib/FlexCAN/FlexCAN.h"
 
 class canbus
 {

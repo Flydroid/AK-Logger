@@ -2,7 +2,7 @@
 #include "config.h"
 
 canbus::canbus(){
-
+	
 	can.begin();
 	broadcast.id = 0x0;
 	broadcast.buf[0] = 0x00;

@@ -12,20 +12,12 @@ Die Funktionien der einzelen Module sind hier definiert.
 
 */
 
-#include "SdFat.h"
-/* Module */
 
 
-//#define TELEMETRY
-#define MASTER
-
-
-#ifdef MASTER
 #define HCLA
-//#define MAVLINK
 #define SD_LOG
 #define DEBUGING
-#define CANBUS
+
 
 
 #define TIME __TIME__
@@ -33,25 +25,19 @@ Die Funktionien der einzelen Module sind hier definiert.
 
 #define MASTER_ID 0x00
 #define MASTER_NAME "AK-Logger Master"
-#define MAX_MODULES 3
-//#define GPS
-#ifdef GPS
-#define SERIAL_GPS Serial2
-#endif
 
-#define CH_AIRSPEED  0x00
-#define CH_ATTACK	 0x01
-#define CH_SLIP	     0x02
+//Der AK-Logger hat normal keine Module und der CAN Bus ist deaktiviert.
+//#define CANBUS
+#define MAX_MODULES 0
+
+
+
 
 //SD-Card Definitions:
 #define SS_PIN 14
-#define BASE_FILENAME "AKXLogger"
+#define BASE_FILENAME "AKLogger"
 
-#endif
 
-#ifdef TELEMETRY
-
-#endif
 
 #ifdef HCLA
 

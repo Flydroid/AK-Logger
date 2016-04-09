@@ -1,29 +1,10 @@
 #include <Arduino.h>
 
-
 #include "config.h"
-#include <EEPROM.h>
-
-
-
-
-#ifdef CANBUS
-void send_broadcast();
-#endif
-#ifdef TELEMETRY
-void send_telemetry();
-#endif
-
-#ifdef MAVLINK
-
-#include "serial.h"
-
-serial mav;
-
-#endif
+#include "../lib/EEPROM/EEPROM.h"
 
 #ifdef SD_LOG
-#include "SdFat.h"
+#include "../lib/SdFat/SdFat.h"
 SdFat sd;
 SdFile sd_file;
 ArduinoOutStream cout(sd_file);
@@ -31,13 +12,8 @@ const uint8_t BASE_NAME_SIZE = sizeof(BASE_FILENAME) - 1;
 char fileName[16] = BASE_FILENAME "00.csv";
 #endif
 
-#ifdef GPS
-#include "TinyGPSPlus/TinyGPS++.h"
-TinyGPSPlus gps;
-#endif
-
 #ifdef CANBUS
-#include "FlexCAN.h"
+#include "../lib/FlexCAN/FlexCAN.h"
 #include "canbus.h"
 canbus cbus;
 CAN_message_t c_msg;
@@ -45,20 +21,20 @@ CAN_message_t c_msg2;
 #endif
 
 #ifdef HCLA
-#include <i2c_t3.h>
+#include "Wire.h"
 #include "sensor.h"
 sensor hcla;
 #endif
 
-#ifdef MASTER
-
 //Set up Time functions
-#include <Time.h>
+#include "Time.h"
 time_t getTeensy3Time()
 {
 	return Teensy3Clock.get();
 }
-uint8_t monthhelper(char* month) {
+
+uint8_t monthhelper(char* month)
+{
 	for (int i = 1; i <= 12;) {
 		if (!strcmp(month, monthShortStr(i))) {
 			return i;
@@ -68,13 +44,11 @@ uint8_t monthhelper(char* month) {
 			i++;
 		}
 	}
+	return 0;
 }
+
 void SetTimeCompile();
 TimeElements tm;
-
-
-
-
 
 //struct with all information on a connected module
 struct MODULE {
@@ -89,48 +63,17 @@ struct MODULE {
 }tmp, module_data[MAX_MODULES + 1];
 
 //Define timer and volatiles timing control
-#ifdef CANBUS
-IntervalTimer broadcast;
-volatile bool c_broadcast;
-#endif //CANBUS
 
-#ifdef TELEMETRY
-volatile bool c_telemetry;
-IntervalTimer telemetry;
-#endif
+IntervalTimer measure;
 
-#ifndef SD_LOG
+volatile bool c_measure;
 
-ArduinoOutStream cout(Serial);
-#define sd_file Serial
-#endif //SDLOG
+int checkedin_Modules = 1;
 
-int checkedin_Modules;
-
-#endif
-
-
-
-/*
-//Interrupt function
-void measureHCLA(){
+//Interupptfunction for Measurement
+void get_data() {
+	c_measure = true;
 }
-*/
-
-#ifdef MASTER
-#ifdef CANBUS
-void send_broadcast() {
-	c_broadcast = true;
-}
-
-#endif //CANBUS
-#ifdef TELEMETRY
-void send_telemetry() {
-	c_telemetry = true;
-}
-#endif
-
-#endif // MASTER
 
 void setup() {
 #ifdef DEBUGING
@@ -140,12 +83,6 @@ void setup() {
 	Serial.println("Serial online");
 #endif	//DEBUG
 
-
-
-
-
-
-#ifdef MASTER
 	//Sync Time after compile
 	setSyncProvider(getTeensy3Time);
 	SetTimeCompile();
@@ -175,27 +112,16 @@ void setup() {
 		Serial.println("Write timestamp fail");
 	}
 
-
 #endif // SD_LOG
 
 #ifdef HCLA
-	hcla.begin();
+	hcla.beginHCLA();
 
 #endif
 
-#ifdef CANBUS
-	broadcast.begin(send_broadcast, 10000);
-#ifdef DEBUGING
-	Serial.println("Broadcast online");
-#endif
-#endif //CANBUS
-#ifdef TELEMETRY
-
-	telemetry.begin(send_telemetry, 1000000);
-#ifdef DEBUG
-	Serial.println("Telemetry online");
-#endif
-#endif // TELEMETRY
+	// Start Meausurement aquisition loop with 10ms delay
+	measure.begin(get_data, 10000);
+	Serial.println("Meausurement online");
 
 	//Bootup end
 
@@ -219,7 +145,7 @@ void setup() {
 	elapsedMillis m_checkin;
 	while (m_checkin < 1000) {
 		CAN_message_t msg;
-	//	Serial.println(m_checkin);
+		//	Serial.println(m_checkin);
 		if (cbus.read(msg)) {
 			module_data[m_num].ID = msg.buf[0];
 			module_data[m_num].ID2 = msg.buf[1];
@@ -313,27 +239,20 @@ void setup() {
 	Serial.println("SD Header ok");
 #endif
 	digitalWrite(13, LOW);
-
-#endif
-
-
 }
 
 void loop() {
-#ifdef MASTER
-
-#ifdef CANBUS
 	//Read sensor, send broadcast, get data from Modules and Store it.
-	if (c_broadcast) {
+	if (c_measure) {
+#ifdef CANBUS
 		//send broadcast
 		cbus.write(cbus.broadcast);
 
+#endif
 		//get time
 		String datastring;
 		datastring += String(millis());
 		datastring += "\t";
-
-#endif // CANBUS
 
 #ifdef HCLA
 		//read the master sensors
@@ -397,41 +316,12 @@ void loop() {
 		sd_file.timestamp(T_WRITE, year(), month(), day(), hour(), minute(), second());
 		sd_file.close();
 #endif
-
-#ifdef CANBUS
 		noInterrupts();
-		c_broadcast = false;
-		interrupts();
-#endif
-	}
-
-#ifdef MAVLINK
-	if (c_telemetry) {
-		/*
-		calculate Telemetry data
-		*Airspeed
-		*angel of attack
-		*slipangle
-		*GPS
-		*lift
-		send Telemetry data
-		*/
-		//Send heartbeat
-
-		mav.heartbeat();
-
-		noInterrupts();
-		c_telemetry = false;
+		c_measure = false;
 		interrupts();
 	}
-
-#endif
-#endif
-
-
 }
 
-#ifdef MASTER
 void SetTimeCompile() {
 	char hour[2], seconds[2], minute[2], month[3], day[2], year[4];
 	for (int i = 0; i < 2; i++) {
@@ -457,6 +347,7 @@ void SetTimeCompile() {
 	tm.Year = atoi(year) - 1970;
 	time_t t = makeTime(tm);
 	time_t datetime = 0;
+
 	datetime += (EEPROM.read(0x00) << 24);
 	datetime += (EEPROM.read(0x01) << 16);
 	datetime += (EEPROM.read(0x02) << 8);
@@ -489,4 +380,3 @@ void SetTimeCompile() {
 	}
 #endif
 }
-#endif

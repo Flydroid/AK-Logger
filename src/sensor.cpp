@@ -1,19 +1,20 @@
 #include "sensor.h"
 #include "config.h"
-#include <stdlib.h>
 
 //counting var for generating the channel array
 int ch_stat = 0;
 
-sensor::sensor() {
+sensor::sensor()
+{
 	
 }
 
-void sensor::begin() {
+
+void sensor::beginHCLA() {
 	pinMode(s0, OUTPUT);
 	pinMode(s1, OUTPUT);
 	pinMode(s2, OUTPUT);
-	Wire.begin(I2C_MASTER, 0x00, I2C_PINS_18_19, I2C_PULLUP_EXT, I2C_RATE_400);
+	Wire.begin();
 #ifdef DEBUGING
 	Serial.println("I2C online");
 #endif //DEBUGGING
@@ -55,17 +56,11 @@ uint16_t sensor::readHCLA(int channel) {
 
 	uint8_t msb, lsb;
 	uint16_t rawPressure;
-	Wire.requestFrom(PRESSURE_SENSOR_ADRESS, 2, I2C_STOP);
-	msb = Wire.readByte();
-	lsb = Wire.readByte();
+	Wire.requestFrom(PRESSURE_SENSOR_ADRESS, 2);
+	msb = Wire.receive();
+	lsb = Wire.receive();
 	rawPressure = (int)(msb << 8) | lsb;
-	if (Wire.getError() == 0) {
-		return rawPressure;
-	}
-	else {
-		return 0;
-		//Error Funktion
-	}
+	return rawPressure;
 }
 
 //channel select für 8 Kanäle
@@ -89,15 +84,7 @@ void sensor::SelectChannel(int channel) {
 	}
 }
 
-/*
-float sensor::calc_airspeed(){
-uint16_t temp = readHCLA(CH_AIRSPEED);
-float airspeed;
-//temp*x; // Airspeed calculation
 
-return airspeed;
-}
-*/
 
 //generates an array which contains the sensor channel numbers
 void sensor::setCh(int chnum) {
