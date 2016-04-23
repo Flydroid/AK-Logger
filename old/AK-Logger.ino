@@ -1,10 +1,11 @@
 #include <Arduino.h>
+#include <Time.h>
 
 #include "config.h"
-#include "../lib/EEPROM/EEPROM.h"
+#include <EEPROM.h>
 
 #ifdef SD_LOG
-#include "../lib/SdFat/SdFat.h"
+#include <SdFat.h>
 SdFat sd;
 SdFile sd_file;
 ArduinoOutStream cout(sd_file);
@@ -13,7 +14,7 @@ char fileName[16] = BASE_FILENAME "00.csv";
 #endif
 
 #ifdef CANBUS
-#include "../lib/FlexCAN/FlexCAN.h"
+#include <FlexCAN.h>
 #include "canbus.h"
 canbus cbus;
 CAN_message_t c_msg;
@@ -27,7 +28,6 @@ sensor hcla;
 #endif
 
 //Set up Time functions
-#include "Time.h"
 time_t getTeensy3Time()
 {
 	return Teensy3Clock.get();
