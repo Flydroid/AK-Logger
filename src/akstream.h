@@ -1,8 +1,8 @@
 #pragma once
 
-class Stream {
+class AKStream {
 public:
-        virtual ~Stream() {
+        virtual ~AKStream() {
 
         }
 

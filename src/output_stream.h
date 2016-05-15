@@ -1,13 +1,15 @@
 #pragma once
 
-#include <string>
+//#include <string>
 
-class OutputStream: public Stream {
+#include "akstream.h"
+
+class OutputStream : public AKStream {
 public:
         virtual ~OutputStream() {
 
         }
 
-        virtual void writeLine(std::string line)=0;
+        virtual void writeLine(char line)=0;
         virtual void flush()=0;
 };

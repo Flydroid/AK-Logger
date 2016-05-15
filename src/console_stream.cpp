@@ -1,6 +1,6 @@
 #include "console_stream.h"
 
-#include <string>
+//#include <string>
 
 ConsoleStream::ConsoleStream() {
 
@@ -18,7 +18,7 @@ void ConsoleStream::close() {
 
 }
 
-void ConsoleStream::writeLine(std::string line) {
+void ConsoleStream::writeLine(char line) {
 
 }
 

@@ -1,6 +1,6 @@
 #include "sdcard_stream.h"
 
-#include <string>
+//#include <string>
 
 SDCardStream::SDCardStream() {
 
@@ -18,7 +18,7 @@ void SDCardStream::close() {
 
 }
 
-void SDCardStream::writeLine(std::string line) {
+void SDCardStream::writeLine(char line) {
 
 }
 

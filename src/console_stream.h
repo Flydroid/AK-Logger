@@ -1,10 +1,10 @@
 #pragma once
 
-#include <string>
+//#include <string>
 
 #include "output_stream.h"
 
-class ConsoleStream: public OutoutStream {
+class ConsoleStream: public OutputStream {
 public:
         ConsoleStream();
         ~ConsoleStream();
@@ -12,6 +12,6 @@ public:
         void open();
         void close();
 
-        void writeLine(std::string line);
+        void writeLine(char line);
         void flush();
-}
+};

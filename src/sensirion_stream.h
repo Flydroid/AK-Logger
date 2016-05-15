@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+//#include <string>
 
 #include "input_stream.h"
 
@@ -12,5 +12,5 @@ public:
         void open();
         void close();
 
-        std::string readNextLine();
-}
+        char readNextLine();
+};

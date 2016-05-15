@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+//#include <string>
 
 #include "output_stream.h"
 
@@ -12,6 +12,6 @@ public:
         void open();
         void close();
 
-        void writeLine(std::string line);
+        void writeLine(char line);
         void flush();
 };

@@ -1,6 +1,6 @@
 #include "ak_logger.h"
 
-#include <string>
+//#include <string>
 
 #include "input_stream.h"
 #include "output_stream.h"
@@ -13,11 +13,11 @@ AKLogger::~AKLogger() {
 
 }
 
-void AKLogger::addOutputStream(OutputStream ostream){
+void AKLogger::addOutputStream(OutputStream* ostream){
 
 }
 
-void AKLogger::addInputStream(InputStream istream) {
+void AKLogger::addInputStream(InputStream* istream) {
 
 }
 
@@ -33,6 +33,6 @@ void AKLogger::logData() {
 
 }
 
-void AKLogger::log(std::string line) {
+void AKLogger::log(char line) {
 
 }

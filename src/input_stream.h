@@ -1,14 +1,14 @@
 #pragma once
 
-#include <string>
+//#include <string>
 
-#include "stream.h"
+#include "akstream.h"
 
-class InputStream: public Stream {
+class InputStream: public AKStream {
 public:
         virtual ~InputStream() {
 
         }
 
-        std::string readNextLine()=0;
+        virtual char readNextLine()=0;
 };
