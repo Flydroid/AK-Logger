@@ -1,9 +1,6 @@
 //Configurations
 #define LOG_INTERVAL_LENGTH_IN_MILLIS 100
 
-#define MAX_OUTPUT_STREAM 5
-#define MAX_INPUT_STREAM 5
-
 //Configuration end
 
 #include <elapsedMillis.h>

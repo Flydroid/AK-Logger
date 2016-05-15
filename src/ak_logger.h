@@ -7,7 +7,7 @@
 
 class AKLogger {
 public:
-        AKLogger(int maxNumberOfOutputStreams, int maxNumberOfInputStreams);
+        AKLogger();
         ~AKLogger();
 
         void addOutputStream(OutputStream* ostream);
@@ -18,7 +18,13 @@ public:
         void logData();
         void log(String line);
 
+        void shutdown();
+
 private:
         SimpleList<OutputStream*> ostreams;
-        SimpleList<InputStreams*> istreams;
+        SimpleList<InputStream*> istreams;
+
+        bool isActive;
+
+        String readInputStreams();
 };
