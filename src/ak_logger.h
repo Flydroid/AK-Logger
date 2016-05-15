@@ -1,13 +1,13 @@
 #pragma once
 
-//#include <string>
+#include <SimpleList.h>
 
 #include "output_stream.h"
 #include "input_stream.h"
 
 class AKLogger {
 public:
-        AKLogger();
+        AKLogger(int maxNumberOfOutputStreams, int maxNumberOfInputStreams);
         ~AKLogger();
 
         void addOutputStream(OutputStream* ostream);
@@ -16,5 +16,9 @@ public:
         void writeHeader();
         void writeFooter();
         void logData();
-        void log(char line);
+        void log(String line);
+
+private:
+        SimpleList<OutputStream*> ostreams;
+        SimpleList<InputStreams*> istreams;
 };

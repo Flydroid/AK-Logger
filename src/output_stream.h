@@ -1,7 +1,5 @@
 #pragma once
 
-//#include <string>
-
 #include "akstream.h"
 
 class OutputStream : public AKStream {
@@ -10,6 +8,6 @@ public:
 
         }
 
-        virtual void writeLine(char line)=0;
+        virtual void writeLine(String line)=0;
         virtual void flush()=0;
 };

@@ -1,7 +1,5 @@
 #pragma once
 
-//#include <string>
-
 #include "akstream.h"
 
 class InputStream: public AKStream {
@@ -10,5 +8,5 @@ public:
 
         }
 
-        virtual char readNextLine()=0;
+        virtual String readNextLine()=0;
 };

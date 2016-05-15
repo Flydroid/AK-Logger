@@ -1,7 +1,5 @@
 #pragma once
 
-//#include <string>
-
 #include "input_stream.h"
 
 class SensirionStream: public InputStream {
@@ -12,5 +10,5 @@ public:
         void open();
         void close();
 
-        char readNextLine();
+        String readNextLine();
 };

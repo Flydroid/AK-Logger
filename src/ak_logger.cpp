@@ -1,7 +1,5 @@
 #include "ak_logger.h"
 
-//#include <string>
-
 #include "input_stream.h"
 #include "output_stream.h"
 
@@ -33,6 +31,6 @@ void AKLogger::logData() {
 
 }
 
-void AKLogger::log(char line) {
+void AKLogger::log(String line) {
 
 }

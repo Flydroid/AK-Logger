@@ -1,6 +1,5 @@
 #include "sensirion_stream.h"
 
-//#include <string>
 
 SensirionStream::SensirionStream() {
 
@@ -18,6 +17,6 @@ void SensirionStream::close() {
 
 }
 
-char SensirionStream::readNextLine() {
-  return 'j';
+String SensirionStream::readNextLine() {
+  return String("hi");
 }

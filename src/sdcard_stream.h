@@ -1,7 +1,5 @@
 #pragma once
 
-//#include <string>
-
 #include "output_stream.h"
 
 class SDCardStream: public OutputStream {
@@ -12,6 +10,6 @@ public:
         void open();
         void close();
 
-        void writeLine(char line);
+        void writeLine(String line);
         void flush();
 };
