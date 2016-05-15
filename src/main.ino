@@ -31,7 +31,17 @@ void setupInputStreams() {
         logger.addInputStream(new SensirionStream);
 }
 
+void setupSerialPort() {
+        Serial.begin(9600);
+
+        while(!Serial){
+                ;
+        }
+}
+
 void setup() {
+        setupSerialPort();
+
         setupOutputStreams();
         setupInputStreams();
 
