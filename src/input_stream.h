@@ -8,5 +8,6 @@ public:
 
         }
 
+        virtual String getLineFormat()=0;
         virtual String readNextLine()=0;
 };

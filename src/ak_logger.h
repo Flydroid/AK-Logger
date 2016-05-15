@@ -27,4 +27,5 @@ private:
         bool isActive;
 
         String readInputStreams();
+        void logLineFormat();
 };

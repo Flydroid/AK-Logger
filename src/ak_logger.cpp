@@ -27,10 +27,17 @@ void AKLogger::addInputStream(InputStream* istream) {
         istreams.push_back(istream);
 }
 
+void AKLogger::logLineFormat() {
+        for(SimpleList<InputStream*>::iterator it = istreams.begin(); it != istreams.end(); it++) {
+                log((*it)->getLineFormat());
+        }
+}
+
 void AKLogger::writeHeader() {
         log("AK-Logger v1.0");
         log("Datum: TODO");
-        log("")
+        log("");
+        logLineFormat();
 }
 
 void AKLogger::writeFooter() {

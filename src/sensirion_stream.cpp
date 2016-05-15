@@ -18,6 +18,10 @@ void SensirionStream::close() {
         sensor.reset();
 }
 
+String SensirionStream::getLineFormat() {
+        return "Temperature;Humidity;Dewpoint;";
+}
+
 String SensirionStream::readNextLine() {
         static float temperature=0.0;
         static float humidity=0.0;

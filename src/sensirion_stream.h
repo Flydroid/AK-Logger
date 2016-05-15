@@ -15,6 +15,7 @@ public:
         void open();
         void close();
 
+        String getLineFormat();
         String readNextLine();
 
 private:
