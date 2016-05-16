@@ -20,7 +20,7 @@ void SensirionStream::close() {
 }
 
 String SensirionStream::getLineFormat() {
-        return "Temperature;Humidity;Dewpoint;";
+        return "Temperature;Humidity;Dewpoint";
 }
 
 String SensirionStream::readNextLine() {
@@ -31,11 +31,11 @@ String SensirionStream::readNextLine() {
         uint8_t err_code = sensor.measure(&temperature, &humidity, &dewpoint);
 
         if(err_code == 1 || err_code == 2) {
-                return "ERROR;ERROR;ERROR;";
+                return "ERROR;ERROR;ERROR";
         }
 
         String result(temperature);
-        result+=";"+String(humidity)+";"+String(dewpoint)+";";
+        result+=";"+String(humidity)+";"+String(dewpoint);
 
         return result;
 }
