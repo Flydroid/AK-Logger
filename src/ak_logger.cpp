@@ -1,5 +1,6 @@
 #include "ak_logger.h"
 
+#include <Arduino.h>
 #include <SimpleList.h>
 
 #include "input_stream.h"

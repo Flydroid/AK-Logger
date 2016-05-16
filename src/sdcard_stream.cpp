@@ -1,5 +1,7 @@
 #include "sdcard_stream.h"
 
+#include <Arduino.h>
+
 SDCardStream::SDCardStream() {
 
 }

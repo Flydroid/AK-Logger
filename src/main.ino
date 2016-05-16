@@ -3,6 +3,7 @@
 
 //Configuration end
 
+#include <Arduino.h>
 #include <elapsedMillis.h>
 
 #include "ak_logger.h"

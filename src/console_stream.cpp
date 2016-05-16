@@ -1,5 +1,7 @@
 #include "console_stream.h"
 
+#include <Arduino.h>
+
 ConsoleStream::ConsoleStream() {
 
 }

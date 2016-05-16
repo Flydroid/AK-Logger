@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Arduino.h>
+
 #define SENSIRION_DATA_PIN 14
 #define SENSIRION_CLOCK_PIN 15
 

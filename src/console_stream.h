@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Arduino.h>
+
 #include "output_stream.h"
 
 class ConsoleStream: public OutputStream {

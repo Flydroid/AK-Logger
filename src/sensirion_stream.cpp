@@ -1,5 +1,6 @@
 #include "sensirion_stream.h"
 
+#include <Arduino.h>
 #include <Sensirion.h>
 
 SensirionStream::SensirionStream(): sensor(SENSIRION_DATA_PIN,SENSIRION_CLOCK_PIN) {

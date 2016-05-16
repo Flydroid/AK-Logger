@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Arduino.h>
 #include <SimpleList.h>
 
 #include "output_stream.h"
