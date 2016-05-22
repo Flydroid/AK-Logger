@@ -15,21 +15,35 @@ AKLogger::~AKLogger() {
 }
 
 void AKLogger::addOutputStream(OutputStream* ostream){
+        if(!isActive)
+                return;
+
         if(ostream == nullptr)
                 return;
 
-        if(ostream->open()) {
-                Serial.println("opened");
+        int err = ostream->open();
+        if(err == AKSTREAM_SUCC) {
+                Serial.println("Successully opened '"+ostream->getName()+"'");
                 ostreams.push_back(ostream);
+        } else {
+                Serial.println("Failed to open '"+ostream->getName()+"': "+String(err));
         }
 }
 
 void AKLogger::addInputStream(InputStream* istream) {
+        if(!isActive)
+                return;
+
         if(istream == nullptr)
                 return;
 
-        if(istream->open())
+        int err = istream->open();
+        if(err == AKSTREAM_SUCC) {
+                Serial.println("Successully opened '"+istream->getName()+"'");
                 istreams.push_back(istream);
+        } else {
+                Serial.println("Failed to open '"+istream->getName()+"': "+String(err));
+        }
 }
 
 void AKLogger::logLineFormat() {

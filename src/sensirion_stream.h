@@ -5,8 +5,6 @@
 #define SENSIRION_DATA_PIN 22
 #define SENSIRION_CLOCK_PIN 23
 
-#define SENSIRION_SUCC 0
-
 #include <Sensirion.h>
 
 #include "input_stream.h"
@@ -21,6 +19,8 @@ public:
 
         String getLineFormat();
         String readNextLine();
+
+        String getName();
 
 private:
         Sensirion sensor;

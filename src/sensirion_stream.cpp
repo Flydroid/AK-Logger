@@ -14,13 +14,13 @@ SensirionStream::~SensirionStream() {
 int SensirionStream::open() {
         sensor.reset();
 
-        return SENSIRION_SUCC;
+        return AKSTREAM_SUCC;
 }
 
 int SensirionStream::close() {
         sensor.reset();
 
-        return SENSIRION_SUCC;
+        return AKSTREAM_SUCC;
 }
 
 String SensirionStream::getLineFormat() {
@@ -42,4 +42,8 @@ String SensirionStream::readNextLine() {
         result+=";"+String(humidity)+";"+String(dewpoint);
 
         return result;
+}
+
+String SensirionStream::getName() {
+        return "SensirionStream";
 }

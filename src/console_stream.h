@@ -4,8 +4,6 @@
 
 #include "output_stream.h"
 
-#define CONSOLE_SUCC 0
-
 class ConsoleStream: public OutputStream {
 public:
         ConsoleStream();
@@ -16,4 +14,6 @@ public:
 
         void writeLine(String line);
         void flush();
+
+        String getName();
 };

@@ -6,7 +6,6 @@
 
 #define SD_CARD_PIN 14
 #define ERR_INIT_SD_CARD 1
-#define SD_CARD_SUCC 0
 
 class SDCardStream: public OutputStream {
 public:
@@ -18,6 +17,8 @@ public:
 
         void writeLine(String line);
         void flush();
+
+        String getName();
 
 private:
         String filename;

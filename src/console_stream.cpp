@@ -12,14 +12,14 @@ ConsoleStream::~ConsoleStream() {
 
 int ConsoleStream::open() {
         //Expects the Serial output already opened with Serial.begin
-        return CONSOLE_SUCC;
+        return AKSTREAM_SUCC;
 }
 
 int ConsoleStream::close() {
         //Serial.end should not be called since Serial might
         //still be used somewhere else.
         //We didnt open it so we dont close it.
-        return CONSOLE_SUCC;
+        return AKSTREAM_SUCC;
 }
 
 void ConsoleStream::writeLine(String line) {
@@ -28,4 +28,8 @@ void ConsoleStream::writeLine(String line) {
 
 void ConsoleStream::flush() {
         Serial.flush();
+}
+
+String ConsoleStream::getName() {
+        return "ConsoleStream";
 }

@@ -18,11 +18,11 @@ int SDCardStream::open() {
         }
 
         isOpened = true;
-        return SD_CARD_SUCC;
+        return AKSTREAM_SUCC;
 }
 
 int SDCardStream::close() {
-        return SD_CARD_SUCC;
+        return AKSTREAM_SUCC;
 }
 
 void SDCardStream::writeLine(String line) {
@@ -39,4 +39,8 @@ void SDCardStream::writeLine(String line) {
 
 void SDCardStream::flush() {
         //Nothing to do
+}
+
+String SDCardStream::getName() {
+        return "SDCardStream";
 }
