@@ -1,6 +1,8 @@
 //Configurations
 #define LOG_INTERVAL_LENGTH_IN_MILLIS 100
 
+#define WAIT_FOR_SERIAL_TO_CONNECT
+
 //Configuration end
 
 #include <Arduino.h>
@@ -24,9 +26,7 @@ bool millisElapsed(int milliseconds) {
 }
 
 void setupOutputStreams() {
-        Serial.println("Console");
         logger.addOutputStream(new ConsoleStream);
-        Serial.println("Sdcard");
         logger.addOutputStream(new SDCardStream("test.txt"));
 }
 
@@ -37,9 +37,11 @@ void setupInputStreams() {
 void setupSerialPort() {
         Serial.begin(9600);
 
+ #ifdef WAIT_FOR_SERIAL_TO_CONNECT
         while(!Serial){
                 ;
         }
+#endif
 }
 
 void setup() {

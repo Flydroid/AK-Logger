@@ -17,6 +17,15 @@ int SDCardStream::open() {
                 return ERR_INIT_SD_CARD;
         }
 
+        if(SD.exists(filename.c_str())) {
+                String newfilename=filename;
+                for(int i=1; SD.exists(newfilename.c_str());i++) {
+                        newfilename = filename + "_" +String(i);
+                }
+
+                filename = newfilename;
+        }
+
         isOpened = true;
         return AKSTREAM_SUCC;
 }
