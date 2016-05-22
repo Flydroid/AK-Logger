@@ -18,14 +18,18 @@ void AKLogger::addOutputStream(OutputStream* ostream){
         if(ostream == nullptr)
                 return;
 
-        ostreams.push_back(ostream);
+        if(ostream->open()) {
+                Serial.println("opened");
+                ostreams.push_back(ostream);
+        }
 }
 
 void AKLogger::addInputStream(InputStream* istream) {
         if(istream == nullptr)
                 return;
 
-        istreams.push_back(istream);
+        if(istream->open())
+                istreams.push_back(istream);
 }
 
 void AKLogger::logLineFormat() {

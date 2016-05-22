@@ -4,14 +4,22 @@
 
 #include "output_stream.h"
 
+#define SD_CARD_PIN 14
+#define ERR_INIT_SD_CARD 1
+#define SD_CARD_SUCC 0
+
 class SDCardStream: public OutputStream {
 public:
-        SDCardStream();
+        SDCardStream(String filename);
         ~SDCardStream();
 
-        void open();
-        void close();
+        int open();
+        int close();
 
         void writeLine(String line);
         void flush();
+
+private:
+        String filename;
+        bool isOpened;
 };

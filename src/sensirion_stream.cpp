@@ -11,12 +11,16 @@ SensirionStream::~SensirionStream() {
 
 }
 
-void SensirionStream::open() {
+int SensirionStream::open() {
         sensor.reset();
+
+        return SENSIRION_SUCC;
 }
 
-void SensirionStream::close() {
+int SensirionStream::close() {
         sensor.reset();
+
+        return SENSIRION_SUCC;
 }
 
 String SensirionStream::getLineFormat() {

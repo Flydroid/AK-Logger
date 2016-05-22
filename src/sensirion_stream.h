@@ -5,6 +5,8 @@
 #define SENSIRION_DATA_PIN 22
 #define SENSIRION_CLOCK_PIN 23
 
+#define SENSIRION_SUCC 0
+
 #include <Sensirion.h>
 
 #include "input_stream.h"
@@ -14,8 +16,8 @@ public:
         SensirionStream();
         ~SensirionStream();
 
-        void open();
-        void close();
+        int open();
+        int close();
 
         String getLineFormat();
         String readNextLine();

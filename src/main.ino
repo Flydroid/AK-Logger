@@ -24,8 +24,10 @@ bool millisElapsed(int milliseconds) {
 }
 
 void setupOutputStreams() {
+        Serial.println("Console");
         logger.addOutputStream(new ConsoleStream);
-        logger.addOutputStream(new SDCardStream);
+        Serial.println("Sdcard");
+        logger.addOutputStream(new SDCardStream("test.txt"));
 }
 
 void setupInputStreams() {
