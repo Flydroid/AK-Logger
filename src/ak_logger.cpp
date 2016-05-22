@@ -75,4 +75,26 @@ void AKLogger::log(String line) {
 void AKLogger::shutdown() {
         if(!isActive)
                 return;
+
+        isActive = false;
+
+        closeAndDeleteOutputStreams();
+        closeAndDeleteInputStreams();
+}
+
+void AKLogger::closeAndDeleteOutputStreams() {
+        for(SimpleList<OutputStream*>::iterator it = ostreams.begin(); it != ostreams.end(); it++) {
+                (*it)->flush();
+                (*it)->close();
+                delete &(*it);
+                it = ostreams.erase(it);
+        }
+}
+
+void AKLogger::closeAndDeleteInputStreams() {
+        for(SimpleList<InputStream*>::iterator it = istreams.begin(); it != istreams.end(); it++) {
+                (*it)->close();
+                delete &(*it);
+                it = istreams.erase(it);
+        }
 }

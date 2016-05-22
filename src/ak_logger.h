@@ -29,4 +29,6 @@ private:
 
         String readInputStreams();
         void logLineFormat();
+        void closeAndDeleteOutputStreams();
+        void closeAndDeleteInputStreams();
 };
