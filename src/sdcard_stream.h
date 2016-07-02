@@ -9,7 +9,7 @@
 
 class SDCardStream: public OutputStream {
 public:
-        SDCardStream(String filename);
+        SDCardStream(String filename, String fileextension);
         ~SDCardStream();
 
         int open();
@@ -22,5 +22,7 @@ public:
 
 private:
         String filename;
+        String fileextension;
+        String fullName;
         bool isOpened;
 };

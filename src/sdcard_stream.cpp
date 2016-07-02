@@ -4,7 +4,7 @@
 #include <SD.h>
 #include <SPI.h>
 
-SDCardStream::SDCardStream(String filename_): filename(filename_), isOpened(false) {
+SDCardStream::SDCardStream(String filename_, String fileextension_): filename(filename_), fileextension(fileextension_), isOpened(false) {
 
 }
 
@@ -17,13 +17,11 @@ int SDCardStream::open() {
                 return ERR_INIT_SD_CARD;
         }
 
-        if(SD.exists(filename.c_str())) {
-                String newfilename=filename;
-                for(int i=1; SD.exists(newfilename.c_str());i++) {
-                        newfilename = filename + "_" +String(i);
+        fullName = filename + "." + fileextension;
+        if(SD.exists(fullName.c_str())) {
+                for(int i=1; SD.exists(fullName.c_str());i++) {
+                        fullName = filename + "_" + String(i) + "." + fileextension;
                 }
-
-                filename = newfilename;
         }
 
         isOpened = true;
@@ -38,7 +36,7 @@ void SDCardStream::writeLine(String line) {
         if(!isOpened)
                 return;
 
-        File logFile = SD.open(filename.c_str(),FILE_WRITE);
+        File logFile = SD.open(fullName.c_str(),FILE_WRITE);
 
         if(logFile) {
                 logFile.println(line);

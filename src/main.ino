@@ -27,7 +27,7 @@ bool millisElapsed(int milliseconds) {
 
 void setupOutputStreams() {
         logger.addOutputStream(new ConsoleStream);
-        logger.addOutputStream(new SDCardStream("test.txt"));
+        logger.addOutputStream(new SDCardStream("test","txt"));
 }
 
 void setupInputStreams() {
