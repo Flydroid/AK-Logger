@@ -12,6 +12,7 @@
 #include "console_stream.h"
 #include "sdcard_stream.h"
 #include "sensirion_stream.h"
+#include "lx9000_stream.h"
 
 AKLogger logger;
 
@@ -32,6 +33,7 @@ void setupOutputStreams() {
 
 void setupInputStreams() {
         logger.addInputStream(new SensirionStream);
+        logger.addInputStream(new Lx9000Stream);
 }
 
 void setupSerialPort() {
@@ -44,11 +46,17 @@ void setupSerialPort() {
 #endif
 }
 
+void setupTime() {
+
+}
+
 void setup() {
         setupSerialPort();
 
         setupOutputStreams();
         setupInputStreams();
+
+        setupTime();
 
         logger.writeHeader();
 }
