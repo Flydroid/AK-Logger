@@ -12,6 +12,7 @@
 #include "console_stream.h"
 #include "sdcard_stream.h"
 #include "sensirion_stream.h"
+#include "time_stream.h"
 
 AKLogger logger;
 
@@ -31,6 +32,7 @@ void setupOutputStreams() {
 }
 
 void setupInputStreams() {
+        logger.addInputStream(new TimeStream);
         logger.addInputStream(new SensirionStream);
 }
 

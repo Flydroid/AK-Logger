@@ -60,7 +60,7 @@ void AKLogger::writeHeader() {
 }
 
 void AKLogger::writeFooter() {
-        log("End of logging: DATUM_TODO");
+        log("End of logging");
 }
 
 String AKLogger::readInputStreams() {

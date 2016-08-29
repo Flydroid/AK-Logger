@@ -17,7 +17,7 @@ int TimeStream::close() {
 }
 
 String TimeStream::getLineFormat() {
-        return "Timestamp;";
+        return "Timestamp";
 }
 
 String TimeStream::readNextLine() {
