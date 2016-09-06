@@ -68,7 +68,7 @@ void AKLogger::writeHeader() {
         datum += "-"+String(month())+"-"+String(day());
 
         log("AK-Logger v1.0");
-        log(datum);
+        log("Datum: "+datum);
         log("");
         logLineFormat();
 }
