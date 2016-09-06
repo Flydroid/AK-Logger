@@ -24,10 +24,8 @@ String TimeStream::getLineFormat() {
 
 String TimeStream::readNextLine() {
         String timeStamp("");
-        timeStamp += String(year())+"-"+String(month())+"-"+
-                        String(day())+" "+String(hour())+":"+
-                        String(minute())+":"+String(second());
-                        
+        timeStamp += String(hour())+":"+String(minute())+":"+String(second());
+
         return "";
 }
 
