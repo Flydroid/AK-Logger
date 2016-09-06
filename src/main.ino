@@ -47,6 +47,21 @@ void setupSerialPort() {
 #endif
 }
 
+void setTimefromUserInput() {
+        if(Serial.available()) {
+                Serial.println("Please enter the current timestamp (0 for skipping):");
+                time_t t;
+                t = Serial.parseInt();
+
+                if(t!=0) {
+                        Teensy3Clock.set(t);
+                        delay(100);
+                        setTime(Teensy3Clock.get());
+                        Serial.println("RTC successfully updated");
+                }
+        }
+}
+
 void setupTime() {
         setSyncProvider((getExternalTime)Teensy3Clock.get());
 
@@ -57,6 +72,8 @@ void setupTime() {
                         Serial.println("RTC has set the system time");
                 }
         }
+
+        setTimefromUserInput();
 }
 
 void setup() {
