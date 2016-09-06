@@ -56,9 +56,11 @@ void AKLogger::addInputStream(InputStream* istream) {
 }
 
 void AKLogger::logLineFormat() {
+        String lineformat="";
         for(SimpleList<InputStream*>::iterator it = istreams.begin(); it != istreams.end(); it++) {
-                log((*it)->getLineFormat());
+                lineformat+=(*it)->getLineFormat()+";";
         }
+        log(lineformat);
 }
 
 void AKLogger::writeHeader() {

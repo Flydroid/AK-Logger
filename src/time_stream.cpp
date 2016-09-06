@@ -26,7 +26,7 @@ String TimeStream::readNextLine() {
         String timeStamp("");
         timeStamp += String(hour())+":"+String(minute())+":"+String(second());
 
-        return "";
+        return timeStamp;
 }
 
 String TimeStream::getName() {

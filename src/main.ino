@@ -2,6 +2,7 @@
 #define LOG_INTERVAL_LENGTH_IN_MILLIS 100
 
 #define WAIT_FOR_SERIAL_TO_CONNECT
+//#define SET_SYSTEM_TIME
 
 //Configuration end
 
@@ -51,7 +52,9 @@ void setTimefromUserInput() {
         if(Serial.available()) {
                 Serial.println("Please enter the current timestamp (0 for skipping):");
                 time_t t;
-                t = Serial.parseInt();
+                Serial.setTimeout(10000);
+                String input = Serial.readString();
+                t = input.toInt();
 
                 if(t!=0) {
                         Teensy3Clock.set(t);
@@ -63,7 +66,7 @@ void setTimefromUserInput() {
 }
 
 void setupTime() {
-        setSyncProvider((getExternalTime)Teensy3Clock.get());
+        setSyncProvider((getExternalTime)Teensy3Clock.get);
 
         if(Serial.available()) {
                 if(timeStatus() != timeSet) {
@@ -73,7 +76,9 @@ void setupTime() {
                 }
         }
 
+#ifdef SET_SYSTEM_TIME
         setTimefromUserInput();
+#endif
 }
 
 void setup() {
