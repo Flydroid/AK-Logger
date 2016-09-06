@@ -1,5 +1,7 @@
 #include "time_stream.h"
 
+#include <Time.h>
+
 TimeStream::TimeStream() {
 
 }
@@ -21,6 +23,11 @@ String TimeStream::getLineFormat() {
 }
 
 String TimeStream::readNextLine() {
+        String timeStamp("");
+        timeStamp += String(year())+"-"+String(month())+"-"+
+                        String(day())+" "+String(hour())+":"+
+                        String(minute())+":"+String(second());
+                        
         return "";
 }
 

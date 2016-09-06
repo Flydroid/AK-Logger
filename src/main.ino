@@ -7,6 +7,7 @@
 
 #include <Arduino.h>
 #include <elapsedMillis.h>
+#include <Time.h>
 
 #include "ak_logger.h"
 #include "console_stream.h"
@@ -47,16 +48,24 @@ void setupSerialPort() {
 }
 
 void setupTime() {
+        setSyncProvider((getExternalTime)Teensy3Clock.get());
 
+        if(Serial.available()) {
+                if(timeStatus() != timeSet) {
+                        Serial.println("Unable to sync with RTC");
+                } else {
+                        Serial.println("RTC has set the system time");
+                }
+        }
 }
 
 void setup() {
         setupSerialPort();
 
+        setupTime();
+
         setupOutputStreams();
         setupInputStreams();
-
-        setupTime();
 
         logger.writeHeader();
 }

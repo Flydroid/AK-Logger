@@ -23,7 +23,9 @@ int ConsoleStream::close() {
 }
 
 void ConsoleStream::writeLine(String line) {
-        Serial.println(line);
+        if(Serial.available()) {
+                Serial.println(line);
+        }
 }
 
 void ConsoleStream::flush() {

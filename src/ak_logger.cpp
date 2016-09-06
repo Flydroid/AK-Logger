@@ -2,6 +2,7 @@
 
 #include <Arduino.h>
 #include <SimpleList.h>
+#include <Time.h>
 
 #include "input_stream.h"
 #include "output_stream.h"
@@ -23,10 +24,14 @@ void AKLogger::addOutputStream(OutputStream* ostream){
 
         int err = ostream->open();
         if(err == AKSTREAM_SUCC) {
-                Serial.println("Successully opened '"+ostream->getName()+"'");
+                if(Serial.available()) {
+                        Serial.println("Successully opened '"+ostream->getName()+"'");
+                }
                 ostreams.push_back(ostream);
         } else {
-                Serial.println("Failed to open '"+ostream->getName()+"': "+String(err));
+                if(Serial.available()) {
+                        Serial.println("Failed to open '"+ostream->getName()+"': "+String(err));
+                }
         }
 }
 
@@ -39,10 +44,14 @@ void AKLogger::addInputStream(InputStream* istream) {
 
         int err = istream->open();
         if(err == AKSTREAM_SUCC) {
-                Serial.println("Successully opened '"+istream->getName()+"'");
+                if(Serial.available()) {
+                        Serial.println("Successully opened '"+istream->getName()+"'");
+                }
                 istreams.push_back(istream);
         } else {
-                Serial.println("Failed to open '"+istream->getName()+"': "+String(err));
+                if(Serial.available()) {
+                        Serial.println("Failed to open '"+istream->getName()+"': "+String(err));
+                }
         }
 }
 
@@ -53,8 +62,11 @@ void AKLogger::logLineFormat() {
 }
 
 void AKLogger::writeHeader() {
+        String datum(year());
+        datum += "-"+String(month())+"-"+String(day());
+
         log("AK-Logger v1.0");
-        log("Datum: TODO");
+        log(datum);
         log("");
         logLineFormat();
 }
