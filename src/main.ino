@@ -1,9 +1,9 @@
 //Configurations
-#define LOG_INTERVAL_LENGTH_IN_MILLIS 100
+#define LOG_INTERVAL_LENGTH_IN_MILLIS 1000
 
-#define USE_SERIAL_PORT
-#define WAIT_FOR_SERIAL_TO_CONNECT
-#define UPDATE_TIME_FROM_USER
+//#define USE_SERIAL_PORT
+//#define WAIT_FOR_SERIAL_TO_CONNECT
+//#define UPDATE_TIME_FROM_USER
 
 //Configuration end
 
