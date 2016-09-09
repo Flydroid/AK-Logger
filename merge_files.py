@@ -17,7 +17,7 @@ with open(arduinoFile) as f:
 with open(igcFile) as f:
 	igcFileContent = f.readlines()
 
-lineFormat = arduinoFileContent[3].rstrip("\n")+";Latitude;Longitude;Altitude;"
+lineFormat = arduinoFileContent[3].rstrip("\n")+"Latitude;Longitude;Altitude;"
 arduinoFileContent = arduinoFileContent[4:]
 for i,x in enumerate(arduinoFileContent):
 	splittedLine = x.split(";",1)
@@ -42,5 +42,5 @@ for x in arduinoFileContent:
 		igcLineDate = datetime.datetime.strptime(time,"%H%M%S")
 
 		if lineDate.hour == igcLineDate.hour and lineDate.minute == igcLineDate.minute and lineDate.second == igcLineDate.second:
-			print x+y[6:14]+";"+y[14:23]
+			print x+y[6:14]+";"+y[14:23]+";"+y[23:34]
 			break
