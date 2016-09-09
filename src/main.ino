@@ -3,6 +3,7 @@
 
 #define USE_SERIAL_PORT
 #define WAIT_FOR_SERIAL_TO_CONNECT
+#define UPDATE_TIME_FROM_USER
 
 //Configuration end
 
@@ -48,6 +49,27 @@ void setupSerialPort() {
 #endif
 }
 
+void updateTimeFromUser() {
+        if(Serial) {
+          Serial.println("Please enter the current timestamp (0 for skipping) and press f to finish input:");
+
+          Serial.setTimeout(60000);
+
+          String input;
+          input = Serial.readStringUntil('f');
+
+          time_t t;
+          t = input.toInt();
+
+          if(t!=0) {
+                  Teensy3Clock.set(t);
+                  delay(100);
+                  setTime(Teensy3Clock.get());
+                  Serial.println("RTC successfully updated");
+          }
+        }
+}
+
 void setupTime() {
         setSyncProvider((getExternalTime)Teensy3Clock.get);
 
@@ -58,6 +80,10 @@ void setupTime() {
                         Serial.println("RTC has set the system time");
                 }
         }
+
+#ifdef UPDATE_TIME_FROM_USER
+        updateTimeFromUser();
+#endif
 }
 
 void setup() {
