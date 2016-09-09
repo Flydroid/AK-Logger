@@ -23,13 +23,15 @@ int ConsoleStream::close() {
 }
 
 void ConsoleStream::writeLine(String line) {
-        if(Serial.available()) {
+        if(Serial) {
                 Serial.println(line);
         }
 }
 
 void ConsoleStream::flush() {
-        Serial.flush();
+        if(Serial) {
+                Serial.flush();
+        }
 }
 
 String ConsoleStream::getName() {
