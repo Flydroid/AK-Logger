@@ -10,6 +10,7 @@
 #include <Arduino.h>
 #include <elapsedMillis.h>
 #include <Time.h>
+#include <TinyGPS++.h>
 
 #include "ak_logger.h"
 #include "console_stream.h"
@@ -18,6 +19,8 @@
 #include "time_stream.h"
 
 AKLogger logger;
+TinyGPSPlus gps;
+
 
 bool millisElapsed(int milliseconds) {
         static elapsedMillis timer;
@@ -49,49 +52,36 @@ void setupSerialPort() {
 #endif
 }
 
-void updateTimeFromUser() {
-        if(Serial) {
-          Serial.println("Please enter the current timestamp (0 for skipping) and press f to finish input:");
-
-          Serial.setTimeout(60000);
-
-          String input;
-          input = Serial.readStringUntil('f');
-
-          time_t t;
-          t = input.toInt();
-
-          if(t!=0) {
-                  Teensy3Clock.set(t);
-                  delay(100);
-                  setTime(Teensy3Clock.get());
-                  Serial.println("RTC successfully updated");
-          }
-        }
+void setupGPS() {
+      Serial2.begin(115200);
 }
 
-void setupTime() {
-        setSyncProvider((getExternalTime)Teensy3Clock.get);
+void  updateTimeFromGPS() {
 
-        if(Serial) {
-                if(timeStatus() != timeSet) {
-                        Serial.println("Unable to sync with RTC");
-                } else {
-                        Serial.println("RTC has set the system time");
-                }
+          while (Serial2.available()) {
+              gps.encode(Serial2.read());
+              if(gps.time.isValid() && gps.time.age()){
+                    setTime(gps.time.hour(),gps.time.minute(),gps.time.second(),gps.date.day(),gps.date.month(),gps.date.year()-1970);
+                  if(timeStatus() != timeSet) {
+                          Serial.println("Unable to sync with GPS Time");
+                  } else {
+                          Serial.println("GPS has set the system time");
+                  }
+
+
+            }
         }
 
-#ifdef UPDATE_TIME_FROM_USER
-        updateTimeFromUser();
-#endif
 }
+
+
 
 void setup() {
 #ifdef USE_SERIAL_PORT
         setupSerialPort();
 #endif
-
-        setupTime();
+        setupGPS();
+        updateTimeFromGPS();
 
         setupOutputStreams();
         setupInputStreams();
