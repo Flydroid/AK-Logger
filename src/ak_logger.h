@@ -13,22 +13,26 @@ public:
 
         void addOutputStream(OutputStream* ostream);
         void addInputStream(InputStream* istream);
+        void closeAndDeleteOutputStreams();
+        void closeAndDeleteInputStreams();
 
         void writeHeader();
         void writeFooter();
         void logData();
         void log(String line);
 
+        void start();
         void shutdown();
+
+        bool isActive;
 
 private:
         SimpleList<OutputStream*> ostreams;
         SimpleList<InputStream*> istreams;
 
-        bool isActive;
 
         String readInputStreams();
         void logLineFormat();
-        void closeAndDeleteOutputStreams();
-        void closeAndDeleteInputStreams();
+
+
 };

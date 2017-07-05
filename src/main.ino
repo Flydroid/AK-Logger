@@ -1,9 +1,11 @@
 //Configurations
 #define LOG_INTERVAL_LENGTH_IN_MILLIS 1000
+#define GPS_CHECK_INTERVAL_IN_MILLIS 10000
 
-//#define USE_SERIAL_PORT
+#define LED_PIN 7
+
+#define USE_SERIAL_PORT
 //#define WAIT_FOR_SERIAL_TO_CONNECT
-//#define UPDATE_TIME_FROM_USER
 
 //Configuration end
 
@@ -11,6 +13,7 @@
 #include <elapsedMillis.h>
 #include <Time.h>
 #include <TinyGPS++.h>
+#include <String>
 
 #include "ak_logger.h"
 #include "console_stream.h"
@@ -21,17 +24,21 @@
 AKLogger logger;
 TinyGPSPlus gps;
 
-
+elapsedMillis log_timer;
+elapsedMillis gps_timer;
+/*
 bool millisElapsed(int milliseconds) {
         static elapsedMillis timer;
 
-        if(timer>LOG_INTERVAL_LENGTH_IN_MILLIS) {
+        if(timer>milliseconds) {
                 timer = 0;
                 return true;
         }
         return false;
 }
+*/
 
+/*
 void setupOutputStreams() {
         logger.addOutputStream(new ConsoleStream);
         logger.addOutputStream(new SDCardStream("flug","log"));
@@ -41,9 +48,10 @@ void setupInputStreams() {
         logger.addInputStream(new TimeStream);
         logger.addInputStream(new SensirionStream);
 }
+*/
 
 void setupSerialPort() {
-        Serial.begin(9600);
+        Serial.begin(115200);
 
  #ifdef WAIT_FOR_SERIAL_TO_CONNECT
         while(!Serial){
@@ -53,44 +61,91 @@ void setupSerialPort() {
 }
 
 void setupGPS() {
-      Serial2.begin(115200);
+      Serial2.begin(38400);
+      Serial.println("Serial2 Online");
+
 }
 
-void  updateTimeFromGPS() {
-
-          while (Serial2.available()) {
-              gps.encode(Serial2.read());
-              if(gps.time.isValid() && gps.time.age()){
-                    setTime(gps.time.hour(),gps.time.minute(),gps.time.second(),gps.date.day(),gps.date.month(),gps.date.year()-1970);
-                  if(timeStatus() != timeSet) {
-                          Serial.println("Unable to sync with GPS Time");
-                  } else {
-                          Serial.println("GPS has set the system time");
-                  }
-
-
-            }
+void updateTimeFromGPS() {
+  while (timeStatus() != timeSet) {
+    Serial.println("waiting for GPS");
+    digitalWrite(LED_PIN, HIGH);
+    while (Serial2.available()) {
+      if (gps.encode(Serial2.read())) {
+        Serial.println("GPS encoded");
+        Serial.println(gps.time.age());
+        Serial.println(gps.time.isValid());
+        if (gps.time.isValid() && gps.time.age() < 1000) {
+          setTime(gps.time.hour() + 2, gps.time.minute(), gps.time.second(),
+                  gps.date.day(), gps.date.month(), gps.date.year());
+          if (timeStatus() != timeSet) {
+            Serial.println("Unable to sync with GPS Time");
+          } else {
+            Serial.println("GPS has set the system time");
+          }
         }
-
+      }
+    }
+    delay(100);
+    digitalWrite(LED_PIN, LOW);
+    delay(100);
+  }
+  digitalWrite(LED_PIN, LOW);
 }
-
-
 
 void setup() {
+
 #ifdef USE_SERIAL_PORT
         setupSerialPort();
 #endif
-        setupGPS();
-        updateTimeFromGPS();
+        pinMode(LED_PIN,OUTPUT);
 
-        setupOutputStreams();
-        setupInputStreams();
+        setupGPS();
+        Serial.println("GPS setup done");
+        updateTimeFromGPS();
+    //    setupOutputStreams();
+    //    setupInputStreams();
 
         logger.writeHeader();
+        pinMode(0, INPUT_PULLDOWN);
+
 }
 
 void loop() {
-        if(millisElapsed(LOG_INTERVAL_LENGTH_IN_MILLIS)) {
-                logger.logData();
+
+
+  bool velocity = 0;
+  if (gps_timer >= GPS_CHECK_INTERVAL_IN_MILLIS) {
+    Serial.println("Check GPS");
+    while (Serial2.available()){
+
+      velocity = digitalRead(0);
+      if (gps.encode(Serial2.read())) {
+        if (gps.location.isValid()) {
+          //velocity = gps.speed.kmph();
         }
+      }
+    }
+
+    if (velocity ==1  && !logger.isActive) {
+      Serial.println("Logger is on");
+      String filename = String("AK-Logger_" + String(hour()) + "-" + String(minute())+ "-" + String(second()) + "_" + String(day())  +"-" + String(month())+ "-" + String(year()));
+      Serial.println(filename);
+      logger.isActive = true;
+      logger.addOutputStream(new SDCardStream(filename, "log"));
+      logger.addOutputStream(new ConsoleStream);
+      logger.addInputStream(new TimeStream);
+      logger.addInputStream(new SensirionStream);
+    }
+    if (velocity ==0 && logger.isActive) {
+      Serial.println("Logger is off");
+      logger.shutdown();
+    }
+    gps_timer =0;
+  }
+
+  if (log_timer >= LOG_INTERVAL_LENGTH_IN_MILLIS && logger.isActive) {
+    logger.logData();
+    log_timer = 0;
+  }
 }

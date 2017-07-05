@@ -1,6 +1,8 @@
 #pragma once
 
 #include <Arduino.h>
+#include <SD.h>
+#include <SPI.h>
 
 #include "output_stream.h"
 
@@ -25,4 +27,5 @@ private:
         String fileextension;
         String fullName;
         bool isOpened;
+        File logFile;
 };
