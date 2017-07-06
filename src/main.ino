@@ -69,15 +69,16 @@ void setupGPS() {
 void updateTimeFromGPS() {
   while (timeStatus() != timeSet) {
     Serial.println("waiting for GPS");
-    digitalWrite(LED_PIN, HIGH);
+   digitalWrite(LED_PIN, HIGH);
     while (Serial2.available()) {
       if (gps.encode(Serial2.read())) {
         Serial.println("GPS encoded");
-        Serial.println(gps.time.age());
-        Serial.println(gps.time.isValid());
-        if (gps.time.isValid() && gps.time.age() < 1000) {
-          setTime(gps.time.hour() + 2, gps.time.minute(), gps.time.second(),
-                  gps.date.day(), gps.date.month(), gps.date.year());
+      //  Serial.println(gps.time.age());
+      //  Serial.println(gps.time.isValid());
+      //  Serial.println(gps.date.isValid());
+        if (gps.time.isValid() && gps.date.isValid() && gps.time.age() < 1000) {
+          // gps.time.hour() for correct Germany timezone
+          setTime(gps.time.hour() + 2, gps.time.minute(), gps.time.second(), gps.date.day(), gps.date.month(), gps.date.year());
           if (timeStatus() != timeSet) {
             Serial.println("Unable to sync with GPS Time");
           } else {
@@ -86,9 +87,6 @@ void updateTimeFromGPS() {
         }
       }
     }
-    delay(100);
-    digitalWrite(LED_PIN, LOW);
-    delay(100);
   }
   digitalWrite(LED_PIN, LOW);
 }
@@ -106,7 +104,7 @@ void setup() {
     //    setupOutputStreams();
     //    setupInputStreams();
 
-        logger.writeHeader();
+      //  logger.writeHeader();
         pinMode(0, INPUT_PULLDOWN);
 
 }
@@ -143,9 +141,9 @@ void loop() {
     }
     gps_timer =0;
   }
-
   if (log_timer >= LOG_INTERVAL_LENGTH_IN_MILLIS && logger.isActive) {
     logger.logData();
     log_timer = 0;
   }
+
 }

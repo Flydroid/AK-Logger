@@ -10,13 +10,17 @@ SDCardStream::~SDCardStream() {
 }
 
 int SDCardStream::open() {
-        if(!SD.begin(SD_CARD_PIN)) {
+        if(!sd.begin(SD_CARD_PIN, SD_SCK_MHZ(50))){
                 return ERR_INIT_SD_CARD;
                 Serial.println("Error SDCard");
+                sd.initErrorHalt();
         }
 
         fullName = filename + "." + fileextension;
-        logFile = SD.open(fullName.c_str(),FILE_WRITE);
+        Serial.println(fullName);
+        if(!logFile.open(fullName.c_str(), O_CREAT | O_WRITE | O_EXCL)){
+            sd.errorHalt("open file failed");
+        }
 
         isOpened = true;
         return AKSTREAM_SUCC;
@@ -29,17 +33,13 @@ int SDCardStream::close() {
 }
 
 void SDCardStream::writeLine(String line) {
-        if(!isOpened){
-        Serial.println("Ready for Write");
-                return;
-        }
-        if(logFile) {
-              if( logFile.println(line)){
-                Serial.println("write Succesful");
-              }
-                logFile.flush();
-        }
+  if (!isOpened) {
+    return;
+  }
+  logFile.println(line);
+  logFile.flush();
 }
+
 
 void SDCardStream::flush() {
         //Nothing to do
