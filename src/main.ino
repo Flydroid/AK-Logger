@@ -26,29 +26,6 @@ TinyGPSPlus gps;
 
 elapsedMillis log_timer;
 elapsedMillis gps_timer;
-/*
-bool millisElapsed(int milliseconds) {
-        static elapsedMillis timer;
-
-        if(timer>milliseconds) {
-                timer = 0;
-                return true;
-        }
-        return false;
-}
-*/
-
-/*
-void setupOutputStreams() {
-        logger.addOutputStream(new ConsoleStream);
-        logger.addOutputStream(new SDCardStream("flug","log"));
-}
-
-void setupInputStreams() {
-        logger.addInputStream(new TimeStream);
-        logger.addInputStream(new SensirionStream);
-}
-*/
 
 void setupSerialPort() {
         Serial.begin(115200);
@@ -134,6 +111,7 @@ void loop() {
       logger.addOutputStream(new ConsoleStream);
       logger.addInputStream(new TimeStream);
       logger.addInputStream(new SensirionStream);
+      logger.writeHeader();
     }
     if (velocity ==0 && logger.isActive) {
       Serial.println("Logger is off");

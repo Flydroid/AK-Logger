@@ -19,7 +19,6 @@ int SensirionStream::open() {
 
 int SensirionStream::close() {
         sensor.reset();
-
         return AKSTREAM_SUCC;
 }
 

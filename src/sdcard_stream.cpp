@@ -17,7 +17,7 @@ int SDCardStream::open() {
         }
 
         fullName = filename + "." + fileextension;
-        Serial.println(fullName);
+
         if(!logFile.open(fullName.c_str(), O_CREAT | O_WRITE | O_EXCL)){
             sd.errorHalt("open file failed");
         }

@@ -36,7 +36,6 @@ void AKLogger::addOutputStream(OutputStream *ostream) {
   } else {
       Serial.println("Failed to open '" + ostream->getName() + "': " + String(err));
   }
-  writeHeader();
 }
 
 void AKLogger::addInputStream(InputStream* istream) {
@@ -122,16 +121,17 @@ void AKLogger::closeAndDeleteOutputStreams() {
                 (*it)->close();
                 Serial.println("Successully closed '"+ (*it)->getName()+"'");
                 delete &(*it);
-                it = ostreams.erase(it);
         }
+        ostreams.clear();
 }
 
 void AKLogger::closeAndDeleteInputStreams() {
-        for(SimpleList<InputStream*>::iterator it = istreams.begin(); it != istreams.end(); it++) {
+        for(SimpleList<InputStream*>::iterator it = istreams.begin(); it != istreams.end();it++ ) {
                 (*it)->close();
                 Serial.println("Successully closed '"+ (*it)->getName()+"'");
                 delete &(*it);
-                it = istreams.erase(it);
+      
 
         }
+        istreams.clear();
 }

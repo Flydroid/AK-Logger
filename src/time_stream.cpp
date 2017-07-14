@@ -15,6 +15,7 @@ int TimeStream::open() {
 }
 
 int TimeStream::close() {
+  
         return AKSTREAM_SUCC;
 }
 
