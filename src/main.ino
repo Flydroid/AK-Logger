@@ -13,7 +13,6 @@
 #include <elapsedMillis.h>
 #include <Time.h>
 #include <TinyGPS++.h>
-#include <String>
 
 #include "ak_logger.h"
 #include "console_stream.h"
