@@ -25,7 +25,7 @@ AKLogger logger;
 TinyGPSPlus gps;
 
 elapsedMillis log_timer;
-elapsedMillis gps_timer;
+//elapsedMillis gps_timer;
 
 void setupSerialPort() {
         Serial.begin(115200);
@@ -38,24 +38,27 @@ void setupSerialPort() {
 }
 
 void setupGPS() {
-      Serial2.begin(38400);
+      Serial2.begin(9600);
       Serial.println("Serial2 Online");
 
 }
 
-void updateTimeFromGPS() {
-  while (timeStatus() != timeSet) {
+void updateTimeFromGPS(){
+  int year = 1970;
+  digitalWrite(LED_PIN, HIGH);
+  while (timeStatus() != timeSet && year <2000){
+    Serial.println(year);
     Serial.println("waiting for GPS");
-   digitalWrite(LED_PIN, HIGH);
     while (Serial2.available()) {
       if (gps.encode(Serial2.read())) {
         Serial.println("GPS encoded");
       //  Serial.println(gps.time.age());
       //  Serial.println(gps.time.isValid());
       //  Serial.println(gps.date.isValid());
-        if (gps.time.isValid() && gps.date.isValid() && gps.time.age() < 1000) {
-          // gps.time.hour() for correct Germany timezone
+        if (gps.time.isValid() && gps.date.isValid() && gps.time.age() < 1000 && gps.date.age() < 1000) {
+          // gps.time.hour() +2 for correct Germany timezone
           setTime(gps.time.hour() + 2, gps.time.minute(), gps.time.second(), gps.date.day(), gps.date.month(), gps.date.year());
+          year = gps.date.year();
           if (timeStatus() != timeSet) {
             Serial.println("Unable to sync with GPS Time");
           } else {
@@ -78,31 +81,39 @@ void setup() {
         setupGPS();
         Serial.println("GPS setup done");
         updateTimeFromGPS();
-    //    setupOutputStreams();
-    //    setupInputStreams();
 
-      //  logger.writeHeader();
-        pinMode(0, INPUT_PULLDOWN);
+        String filename = String("AK-Logger_" + String(hour()) + "-" + String(minute())+ "-" + String(second()) + "_" + String(day())  +"-" + String(month())+ "-" + String(year()));
+        logger.addOutputStream(new SDCardStream(filename, "log"));
+        logger.addOutputStream(new ConsoleStream);
+        logger.addInputStream(new TimeStream);
+        logger.addInputStream(new SensirionStream);
+        logger.writeHeader();
+
+
+
 
 }
 
 void loop() {
 
+/*
+Alternativer Code für Automatisches Starten und Beendens des Loggers beim Starten und Landen
+des Flugzeuges
 
-  bool velocity = 0;
+
+  int velocity =0;
   if (gps_timer >= GPS_CHECK_INTERVAL_IN_MILLIS) {
     Serial.println("Check GPS");
     while (Serial2.available()){
-
-      velocity = digitalRead(0);
+      velocity = 15;
       if (gps.encode(Serial2.read())) {
         if (gps.location.isValid()) {
-          //velocity = gps.speed.kmph();
+            //velocity = gps.speed.kmph();
         }
       }
     }
 
-    if (velocity ==1  && !logger.isActive) {
+    if (velocity >=15  && !logger.isActive) {
       Serial.println("Logger is on");
       String filename = String("AK-Logger_" + String(hour()) + "-" + String(minute())+ "-" + String(second()) + "_" + String(day())  +"-" + String(month())+ "-" + String(year()));
       Serial.println(filename);
@@ -113,7 +124,7 @@ void loop() {
       logger.addInputStream(new SensirionStream);
       logger.writeHeader();
     }
-    if (velocity ==0 && logger.isActive) {
+    if (velocity <=10 && logger.isActive) {
       Serial.println("Logger is off");
       logger.shutdown();
     }
@@ -123,5 +134,14 @@ void loop() {
     logger.logData();
     log_timer = 0;
   }
+
+  */
+
+  if (log_timer >= LOG_INTERVAL_LENGTH_IN_MILLIS) {
+    logger.logData();
+    log_timer = 0;
+  }
+
+
 
 }

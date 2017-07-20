@@ -59,7 +59,6 @@ void AKLogger::logLineFormat() {
         String lineformat="";
         for(SimpleList<InputStream*>::iterator it = istreams.begin(); it != istreams.end(); it++) {
                 lineformat+=(*it)->getLineFormat()+";";
-                Serial.println(lineformat);
         }
         log(lineformat);
 }
@@ -130,7 +129,7 @@ void AKLogger::closeAndDeleteInputStreams() {
                 (*it)->close();
                 Serial.println("Successully closed '"+ (*it)->getName()+"'");
                 delete &(*it);
-      
+
 
         }
         istreams.clear();
