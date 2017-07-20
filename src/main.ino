@@ -45,7 +45,7 @@ void setupGPS() {
 void updateTimeFromGPS(){
   int year = 1970;
   digitalWrite(LED_PIN, HIGH);
-  while (timeStatus() != timeSet && year <2000){
+  while (timeStatus() != timeSet && year <=2000){
     Serial.println(year);
     Serial.println("waiting for GPS");
     while (Serial2.available()) {
@@ -80,7 +80,7 @@ void setup() {
         setupGPS();
         Serial.println("GPS setup done");
         updateTimeFromGPS();
-
+        logger.start();
         String filename = String("AK-Logger_" + String(hour()) + "-" + String(minute())+ "-" + String(second()) + "_" + String(day())  +"-" + String(month())+ "-" + String(year()));
         logger.addOutputStream(new SDCardStream(filename, "log"));
         logger.addOutputStream(new ConsoleStream);
