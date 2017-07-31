@@ -7,6 +7,10 @@
 #define USE_SERIAL_PORT
 //#define WAIT_FOR_SERIAL_TO_CONNECT
 
+
+//  int ser=9600; // GPS Kommunikationsgeschwindigkeit für DG-1000
+  int ser=38400; // GPS Kommunikationsgeschwindigkeit für ASG32
+
 //Configuration end
 
 #include <Arduino.h>
@@ -37,7 +41,9 @@ void setupSerialPort() {
 }
 
 void setupGPS() {
-      Serial2.begin(9600);
+
+
+      Serial2.begin(ser);
       Serial.println("Serial2 Online");
 
 }
@@ -45,10 +51,11 @@ void setupGPS() {
 void updateTimeFromGPS(){
   int year = 1970;
   digitalWrite(LED_PIN, HIGH);
-  while (timeStatus() != timeSet && year <=2000){
+  while (timeStatus() != timeSet && year <=2010){
     Serial.println(year);
     Serial.println("waiting for GPS");
     while (Serial2.available()) {
+      Serial.println("GPS availabl");
       if (gps.encode(Serial2.read())) {
         Serial.println("GPS encoded");
       //  Serial.println(gps.time.age());
@@ -56,7 +63,7 @@ void updateTimeFromGPS(){
       //  Serial.println(gps.date.isValid());
         if (gps.time.isValid() && gps.date.isValid() && gps.time.age() < 1000 && gps.date.age() < 1000) {
           // gps.time.hour() +2 for correct Germany timezone
-          setTime(gps.time.hour() + 2, gps.time.minute(), gps.time.second(), gps.date.day(), gps.date.month(), gps.date.year());
+          setTime(gps.time.hour(), gps.time.minute(), gps.time.second(), gps.date.day(), gps.date.month(), gps.date.year());
           year = gps.date.year();
           if (timeStatus() != timeSet) {
             Serial.println("Unable to sync with GPS Time");
@@ -82,6 +89,7 @@ void setup() {
         updateTimeFromGPS();
         logger.start();
         String filename = String("AK-Logger_" + String(hour()) + "-" + String(minute())+ "-" + String(second()) + "_" + String(day())  +"-" + String(month())+ "-" + String(year()));
+        Serial.println(filename);
         logger.addOutputStream(new SDCardStream(filename, "log"));
         logger.addOutputStream(new ConsoleStream);
         logger.addInputStream(new TimeStream);
@@ -137,8 +145,9 @@ des Flugzeuges
   */
 
   if (log_timer >= LOG_INTERVAL_LENGTH_IN_MILLIS) {
-    logger.logData();
     log_timer = 0;
+    logger.logData();
+   //Laufzeit Logger 322ms
   }
 
 
